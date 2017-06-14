@@ -1,0 +1,20 @@
+{
+  "name": "estewart.net",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Source code for my personal website/portfolio",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StewartEthan/estewart.net.git"
+  },
+  "author": "Ethan Stewart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StewartEthan/estewart.net/issues"
+  },
+  "homepage": "https://github.com/StewartEthan/estewart.net#readme"
+}
