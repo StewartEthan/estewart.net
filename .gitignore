@@ -1,6 +1,9 @@
 # Testing files/directories
 **/stack_testing
 
+# Processed assets files
+dist/
+
 # Logs
 logs
 *.log
