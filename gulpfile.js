@@ -4,6 +4,7 @@ const del     = require('del');
 const gulp    = require('gulp');
 const gutil   = require('gulp-util');
 const jsh     = require('gulp-jshint');
+const nodemon = require('gulp-nodemon'); 
 const stylint = require('gulp-stylint');
 const stylus  = require('gulp-stylus');
 const uglify  = require('gulp-uglify');
@@ -47,7 +48,7 @@ gulp.task('eval:js', () => {
 });
 gulp.task('eval:stylus', () => {
   return gulp.src('assets/css/**/*.styl')
-    .pipe(stylint())
+    .pipe(stylint({ config: './.stylintrc' }))
     .pipe(stylint.reporter())
     .on('error', logErr);
 });
@@ -63,9 +64,18 @@ gulp.task('watch:js', () => {
 });
 gulp.task('watch', gulp.parallel('watch:css','watch:js'));
 
+// Serve task
+// Runs nodemon through gulp
+gulp.task('serve', () => {
+  return nodemon({
+    script: './app.js',
+    ignore: ['assets/','dist/','views/']
+  });
+});
+
 // Default task
 // 1. Clean out the dist folder
 // 2. Build all assets
 // 3. Watch for file changes
-gulp.task('default', gulp.series('clean','build','watch'));
+gulp.task('default', gulp.series('clean','build', gulp.parallel('watch','serve')));
 
