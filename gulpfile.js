@@ -41,7 +41,7 @@ gulp.task('build', gulp.series('build:css','build:js'));
 // case of build fails or whatever
 gulp.task('eval:js', () => {
   return gulp.src('assets/js/**/*.js')
-    .pipe(jsh())
+    .pipe(jsh({esversion: 6}))
     .pipe(jsh.reporter('jshint-stylish'))
     .on('error', logErr);
 });
