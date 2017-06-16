@@ -1,0 +1,184 @@
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url('/assets/fonts/Pokemon Solid.ttf');
+}
+@font-face {
+  font-family: "Pokemon Hollow";
+  src: url('/assets/fonts/Pokemon Hollow.ttf');
+}
+@font-face {
+  font-family: "Calibri Light";
+  src: url('/assets/fonts/calibril.ttf');
+}
+
+.form-wrapper {
+  margin: 0 auto;
+  max-width: 350px;
+
+  & > .main-heading {
+    text-align: center;
+    /*white-space: nowrap;*/
+  }
+
+  .field-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+    input, textarea {
+      border-radius: 5px;
+    }
+
+    input {
+      border: 1px solid #D0D0D0;
+      font-family: verdana, sans-serif;
+      font-size: 0.8em;
+      padding: 5px;
+    }
+
+    textarea {
+      border-color: #D0D0D0;
+      height: 200px;
+      margin-top: 10px;
+      width: calc(100% - 6px);
+    }
+
+    &.force-block {
+      display: block;
+    }
+  }
+}
+
+.recipe-wrapper {
+  margin: 0 auto;
+  margin-left: 50px;
+  /*max-width: 1000px;*/
+
+  label {
+    color: #76b7db;
+    /*color: #1c6e8c;*/
+    font-family: "Pokemon Solid", "Trebuchet MS", sans-serif;
+    letter-spacing: 2px;
+  }
+
+  ol, ul {
+    font-family: "Calibri Light", verdana, sans-serif;
+  }
+
+  ul li {
+    list-style-type: none;
+    margin-left: -15px;
+
+    &:before {
+      content: "- ";
+    }
+  }
+
+  .headings {
+    margin-bottom: 100px;
+    text-align: center;
+
+    h1 {
+      color: #76b7db;
+      /*color: #1c6e8c;*/
+      font-family: "Pokemon Solid", "Trebuchet MS", sans-serif;
+      font-size: 18pt;
+      letter-spacing: 5px;
+    }
+
+    h2 {
+      /*color: #325187;*/
+      /*color: #1d415e;*/
+      font-family: "Pokemon Hollow", "Trebuchet MS", sans-serif;
+      font-size: 12pt;
+      letter-spacing: 3px;
+      margin-top: 0;
+    }
+
+    /*.yield {
+      font-family: "Calibri Light", verdana, sans-serif;
+      font-size: 10pt;
+      margin-bottom: 40px;
+      text-align: left;
+
+      &:before {
+        content: "Yields: ";
+      }
+    }*/
+  } /* .headings */
+
+  .yield {
+    font-family: "Calibri Light", verdana, sans-serif;
+    font-size: 12pt;
+    margin-top: 50px;
+    text-align: center;
+
+    &:before {
+      content: "Yields: ";
+    }
+  }
+
+  .recipe-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+
+    .custom-button {
+      margin: 0;
+      width: 40%;
+    }
+  }
+} /* .recipe-wrapper */
+
+@media screen and (max-width: 600px) {
+  .recipe-wrapper .recipe-buttons {
+    display: block;
+
+    .custom-button {
+      margin: 10px auto;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-wrapper .field-group {
+    display: block;
+    input, textarea {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  body {
+    background: none;
+  }
+
+  header, nav, footer,
+  .recipe-buttons {
+    display: none !important;
+  }
+
+  .recipe-wrapper {
+    & > div {
+      margin-left: -80px;
+      &.headings {
+        margin-left: auto;
+      }
+    }
+
+    & .yield {
+      margin-left: -80px;
+    }
+  }
+}

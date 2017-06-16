@@ -1,0 +1,45 @@
+// Styles for the body
+:root
+  font-size 16px
+
+html, body
+  margin 0
+  padding 0
+
+body
+  background #D0D0D0 - 25%
+
+  & > div
+    box-shadow 0px 0px 50px 0px black
+    display flex
+    flex-direction column;
+    height 100vh
+    margin auto
+    max-width $normal
+    min-height $doc-min-height
+    min-width 310px
+
+    main
+      background-color white
+      flex-grow 1
+      font-family $primary-font
+      font-size 1em
+      padding 10px
+
+      & > div
+        background-color white
+        line-height 25px
+        margin 0 auto
+        width 90%
+
+        & > h1
+          font-family $heading-font
+
+        a
+          color $primary-blue
+          font-family "Trebuchet MS", Helvetica, sans-serif
+          font-size 13pt
+
+@media print
+  .print-hide
+    display none

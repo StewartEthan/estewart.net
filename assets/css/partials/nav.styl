@@ -1,0 +1,59 @@
+nav
+  background-color $primary-blue
+  color white
+  font-family $heading-font
+  font-size 1.1rem
+  text-shadow 1.5px 1.5px 3px black
+
+  +break()
+    font-size 1.5rem
+  +break($small)
+    flex-grow 1
+
+  div
+    // border-top 2px solid #D0D0D0
+    margin auto
+    max-width 500px
+    padding 15px 15px 0
+    width 90%
+
+    span
+      display flex
+      justify-content center
+      padding 0.5rem 0 0
+      text-decoration underline
+      text-transform uppercase
+
+    ul
+      margin auto
+      overflow hidden
+
+      display flex
+      flex-wrap wrap
+      justify-content space-around
+
+      li
+        font-family $heading-font
+        letter-spacing 2px
+        padding 10px 0
+        text-align center
+        width 25%
+
+        a
+          color white
+          cursor pointer
+          text-decoration none
+          text-transform uppercase
+          transition 250ms
+
+          &:hover,
+          &:focus
+            font-weight 900
+            letter-spacing 5px
+
+          &:focus
+            outline none
+            text-decoration underline
+
+          &:visited
+            color white
