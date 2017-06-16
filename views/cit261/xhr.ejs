@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%
+    var page = page || {};
+    page.title = "CIT 261: DOM Manipulation";
+    page.noUtilities = true;
+  %>
+  <% include ../partials/head-tags %>
+  <style>
+    button:disabled {
+      background: #D0D0D0;
+      color: black;
+      cursor: not-allowed;
+      text-decoration: line-through;
+      text-shadow: none;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2, code {
+      font-family: firacode, mono;
+    }
+
+    code {
+      font-size: 1.05em;
+      letter-spacing: 1px;
+    }
+
+    li code:first-child::after {
+      content: ": ";
+    }
+
+    .button-wrapper button {
+      flex-grow: 1;
+    }
+
+    .button-wrapper, .controls {
+      display: flex;
+      justify-content: space-between;
+    }
+    .colored-div {
+      background: red;
+      color: white;
+      cursor: default;
+      margin: 10px 0;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .controls button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin: 0;
+      padding: 7px 15px;
+    }
+
+    .controls input {
+      border: 1px solid #002265;
+      border-radius: 5px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      flex-grow: 1;
+      font-family: verdana, sans-serif;
+      font-size: 1em;
+      padding: 5px;
+    }
+
+    .custom-button {
+      margin: 0 0 20px;
+    }
+
+    .custom-button.hide-btn {
+      font-size: 0.95em;
+      margin: 0;
+      padding: 3px 10px;
+    }
+
+    .custom-button.reset {
+      font-size: 0.75em;
+      margin: 0;
+    }
+
+    .method {
+      border: 1px solid rgba(0,0,0,0.5);
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+      margin: 40px auto;
+      max-width: 500px;
+      padding: 0 20px 20px;
+    }
+
+    .optional {
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <% include ../partials/header %>
+    <main>
+      <div>
+        <h1>Cit 261: DOM Manipulation</h1>
+        <p>Open the developer console to see the results of an XHR request</p>
+      </div>
+    </main>
+    <% include ../partials/footer %>
+  </div>
+
+  <script>
+  // XHR example
+    // Create new instance of XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    const url = 'http://www.omdbapi.com/?s=star+wars';
+
+    // Call the open method
+    xhr.open(method, url, true);
+
+    // Set the readystatechange event listener
+    // This is the code to be run when the request is finished
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        let response;
+        try {
+          response = JSON.parse(xhr.response);
+        } catch (err) {
+          console.error('Could not parse response as JSON:', err);
+          return;
+        }
+        console.info('Status:', xhr.status); // 200 means success, 404 means page not found, etc.
+        console.log(response);
+      }
+    }
+
+    // Set any HTTP headers that you want to send with the request
+    xhr.setRequestHeader('Accept', 'application/json');
+
+    // Send the request
+    xhr.send(null);
+  </script>
+</body>
+</html>

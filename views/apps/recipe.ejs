@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%
+    var page = page || {};
+    page.title = "Recipe Beautifier";
+  %>
+  <% include ../partials/head-tags %>
+  <link rel="stylesheet" href="/assets/css/compiled/recipe.css">
+</head>
+
+<body>
+  <div>
+    <% include ../partials/header %>
+    <main>
+      <div>
+        <div class="form-wrapper">
+          <h1 class="main-heading">Recipe Beautifier</h1>
+          <div class="field-group">
+            <label>Title</label>
+            <input type="text" id="title">
+          </div>
+          <div class="field-group">
+            <label>Subtitle</label>
+            <input type="text" id="subtitle">
+          </div>
+          <div class="field-group">
+            <label>Yield</label>
+            <input type="text" id="yield">
+          </div>
+          <div class="field-group force-block">
+            <label>Ingredients</label>
+            <textarea id="ingredients" class="force-block"></textarea>
+          </div>
+          <div class="field-group force-block">
+            <label>Directions</label>
+            <textarea id="directions" class="force-block"></textarea>
+          </div>
+          <div id="beautifyBtn" class="custom-button">
+            Beautify
+          </div>
+        </div>
+        <div class="recipe-wrapper hidden">
+          <div class="headings">
+            <h1 class="title"></h1>
+            <h2 class="subtitle"></h2>
+          </div>
+          <div>
+            <label>Ingredients</label>
+            <ul class="ingredients"></ul>
+          </div>
+          <div>
+            <label>Directions</label>
+            <ol class="directions"></ol>
+          </div>
+          <p class="yield">
+
+          </p>
+
+          <div class="recipe-buttons">
+            <div id="newRecipeBtn" class="custom-button">
+              New Recipe
+            </div>
+            <div id="editRecipeBtn" class="custom-button">
+              Edit Recipe
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <% include ../partials/footer %>
+  </div>
+  <script>
+  function createRecipe(fieldGroups) {
+    var recipe = {};
+
+    for (var i = 0; i < fieldGroups.length; i++) {
+      var fieldGroup = fieldGroups[i];
+      var input = fieldGroup.querySelector('input') || fieldGroup.querySelector('textarea');
+      var key = input.getAttribute('id');
+      var content = input.value;
+
+      if (key === 'ingredients' || key === 'directions') {
+        // Split ingredients and directions into arrays with no empty string content
+        content = content.split('\n').filter(function(el) {
+          return el !== undefined &&
+                 el !== null &&
+                 el !== '';
+        });
+      }
+
+      recipe[key] = content;
+    }
+
+    return recipe;
+  }
+
+  function editRecipe() {
+    addClass(recipeWrapper, 'hidden');
+    removeClass(formWrapper, 'hidden');
+
+    document.querySelector('.form-wrapper #title').focus();
+  }
+
+  function emptyFields() {
+    document.querySelectorAll('.form-wrapper .field-group').forEach(function(fieldGroup) {
+      var input = fieldGroup.querySelector('input') || fieldGroup.querySelector('textarea');
+      input.value = '';
+    });
+  }
+
+  var formWrapper = document.querySelector('.form-wrapper');
+  var recipeWrapper = document.querySelector('.recipe-wrapper');
+  var beautifyBtn = document.querySelector('#beautifyBtn');
+  var newRecipeBtn = document.querySelector('#newRecipeBtn');
+  var editRecipeBtn = document.querySelector('#editRecipeBtn');
+
+  beautifyBtn.addEventListener('click', function() {
+    // Grab recipe info
+    var fieldGroups = document.querySelectorAll('.form-wrapper .field-group');
+    var recipe = createRecipe(fieldGroups);
+
+    // Populate fields in recipe view
+    for (var key in recipe) {
+      var selector = '.' + key;
+      var elem = document.querySelector('.recipe-wrapper ' + selector);
+      // Hide any unspecified portions of the recipe
+      if (recipe[key] === null || recipe[key] === undefined || recipe[key] === '') {
+        addClass(elem, 'hidden');
+      } else {
+        removeClass(elem, 'hidden');
+      }
+      if (key === 'ingredients' || key === 'directions') {
+        elem.innerHTML = '';
+        for (var item of recipe[key]) {
+          var child = document.createElement('li');
+          child.innerHTML = item;
+          elem.appendChild(child);
+        }
+      } else {
+        elem.innerHTML = recipe[key];
+      }
+    }
+
+    // Hide form and show recipe after brief delay
+    setTimeout(function() {
+      addClass(formWrapper, 'hidden');
+      removeClass(recipeWrapper, 'hidden');
+    }, 250);
+  });
+  newRecipeBtn.addEventListener('click', function() {
+    // Confirm the choice
+    var message = "By continuing, all previous recipe information will be deleted";
+    // TODO: Use custom modal of some sort instead
+    if (confirm(message)) {
+      // Empty form fields
+      emptyFields();
+
+      // Call editRecipe for common logic
+      editRecipe();
+    }
+  });
+  editRecipeBtn.addEventListener('click', function() {
+    // Call the editRecipe function
+    editRecipe();
+  });
+
+  window.onload = function() {
+    document.querySelector('.form-wrapper #title').focus();
+  }
+  </script>
+</body>
+</html>

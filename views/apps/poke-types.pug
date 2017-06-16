@@ -1,0 +1,17 @@
+extends /views/partials/layout.pug
+
+prepend head
+  - page.title = 'Pokemon Types';
+  - assets.js.push('/assets/js/apps/poke-types.js');
+  
+  style.
+    .poke-search {
+      font-size: 1.2rem;
+      margin: 0 25%;
+      padding: 10px;
+      width: 50%;
+    }
+
+block content
+  input.poke-search(type="search" placeholder="Search Pokémon by name...")
+  .poke-list
