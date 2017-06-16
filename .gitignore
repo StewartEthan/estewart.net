@@ -4,6 +4,9 @@
 # Processed assets files
 dist/
 
+# Whatever the crap Thumbs.db is...
+Thumbs.db
+
 # Logs
 logs
 *.log
