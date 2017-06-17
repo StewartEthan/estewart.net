@@ -9,16 +9,18 @@ const stylint = require('gulp-stylint');
 const stylus  = require('gulp-stylus');
 const uglify  = require('gulp-uglify');
 
-// Error logging fn
-const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
+const assetTypes = ['css','fonts','img','js'];
 const buildDir = 'public';
+const getTasks = task => assetTypes.map(type => `${task}:${type}`);
+const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
 
 // Clean tasks
 // For cleaning out the dist folder, either
 // in parts or as a whole
-gulp.task('clean:css', () => del([`${buildDir}/css`]));
-gulp.task('clean:js', () => del([`${buildDir}/js`]));
-gulp.task('clean', () => del([buildDir]));
+assetTypes.forEach(dir => {
+  gulp.task(`clean:${dir}`, () => del([`${buildDir}/${dir}/**/*`]));
+});
+gulp.task('clean', gulp.parallel(...getTasks('clean')));
 
 // Build tasks
 // - pipes Stylus files into CSS
@@ -29,6 +31,16 @@ gulp.task('build:css', () => {
     .pipe(gulp.dest(`${buildDir}/css`))
     .on('error', logErr);
 });
+gulp.task('build:fonts', () => {
+  return gulp.src('assets/fonts/**/*')
+    .pipe(gulp.dest(`${buildDir}/fonts`))
+    .on('error', logErr);
+});
+gulp.task('build:img', () => {
+  return gulp.src('assets/img/**/*')
+    .pipe(gulp.dest(`${buildDir}/img`))
+    .on('error', logErr);
+});
 gulp.task('build:js', () => {
   return gulp.src('assets/js/**/*.js')
     .pipe(babel({ presets:['es2015'] }))
@@ -36,7 +48,7 @@ gulp.task('build:js', () => {
     .pipe(gulp.dest(`${buildDir}/js`))
     .on('error', logErr);
 });
-gulp.task('build', gulp.series('build:css','build:js'));
+gulp.task('build', gulp.parallel(...getTasks('build')));
 
 // Eval tasks
 // Useful for error checking in
@@ -57,13 +69,18 @@ gulp.task('eval', gulp.series('eval:js','eval:stylus'));
 
 // Watch task
 // For rebuilding assets on file changes
-gulp.task('watch:css', () => {
-  gulp.watch('assets/css/**/*.styl', gulp.series('build:css'));
+assetTypes.forEach(dir => {
+  gulp.task(`watch:${dir}`, () => {
+    gulp.watch(`assets/${dir}/**/*`, gulp.series(`build:${dir}`));
+  });
 });
-gulp.task('watch:js', () => {
-  gulp.watch('assets/js/**/*.js', gulp.series('build:js'));
-});
-gulp.task('watch', gulp.parallel('watch:css','watch:js'));
+// gulp.task('watch:css', () => {
+//   gulp.watch('assets/css/**/*.styl', gulp.series('build:css'));
+// });
+// gulp.task('watch:js', () => {
+//   gulp.watch('assets/js/**/*.js', gulp.series('build:js'));
+// });
+gulp.task('watch', gulp.parallel(...getTasks('watch')));
 
 // Serve task
 // Runs nodemon through gulp
