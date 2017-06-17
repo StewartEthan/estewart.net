@@ -22,6 +22,14 @@ link(
   href="/css/compiled/style.css"
 )
 
+if assets.css.length
+  each style in assets.css
+    link(
+      rel="stylesheet"
+      type="text/css"
+      href=`${'/public/'}style`
+    )
+
 link(
   rel="icon"
   href="/assets/img/favicon.ico"
