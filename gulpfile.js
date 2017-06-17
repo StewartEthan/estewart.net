@@ -78,6 +78,10 @@ assetTypes.forEach(dir => {
 });
 gulp.task('watch', gulp.parallel(...getTasks('watch')));
 
+// Rebuild task
+// Shortcut to clean, then build
+gulp.task('rebuild', gulp.series('clean','build'));
+
 // Serve task
 // Runs nodemon through gulp
 gulp.task('serve', () => {
