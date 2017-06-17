@@ -3,6 +3,7 @@
 
 # Processed assets files
 dist/
+public/
 
 # Whatever the crap Thumbs.db is...
 Thumbs.db
