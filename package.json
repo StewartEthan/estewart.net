@@ -8,10 +8,8 @@
     "node": "8"
   },
   "scripts": {
-    "watch-front": "gulp",
-    "watch-server": "nodemon ./app.js --ignore assets/ --ignore dist/ --ignore views/",
-    "start": "concurrently \"npm run watch-front\" \"npm run watch-server\" --names \"📦,💻\" --prefix name",
-    "postinstall": "gulp build"
+    "postinstall": "gulp build",
+    "start": "node ./app.js"
   },
   "repository": {
     "type": "git",
