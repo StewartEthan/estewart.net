@@ -11,28 +11,29 @@ const uglify  = require('gulp-uglify');
 
 // Error logging fn
 const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
+const buildDir = 'public';
 
 // Clean tasks
 // For cleaning out the dist folder, either
 // in parts or as a whole
-gulp.task('clean:css', () => del(['dist/assets/css']));
-gulp.task('clean:js', () => del(['dist/assets/js']));
-gulp.task('clean', () => del(['dist']));
+gulp.task('clean:css', () => del([`${buildDir}/css`]));
+gulp.task('clean:js', () => del([`${buildDir}/js`]));
+gulp.task('clean', () => del([buildDir]));
 
 // Build tasks
 // - pipes Stylus files into CSS
 // - transpiles JS files down to ES5 compatibility
 gulp.task('build:css', () => {
   return gulp.src('assets/css/**/*.styl')
-    .pipe(stylus({compress:true}))
-    .pipe(gulp.dest('dist/assets/css'))
+    .pipe(stylus({ compress:true }))
+    .pipe(gulp.dest(`${buildDir}/css`))
     .on('error', logErr);
 });
 gulp.task('build:js', () => {
   return gulp.src('assets/js/**/*.js')
     .pipe(babel({ presets:['es2015'] }))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/assets/js'))
+    .pipe(gulp.dest(`${buildDir}/js`))
     .on('error', logErr);
 });
 gulp.task('build', gulp.series('build:css','build:js'));
@@ -69,7 +70,7 @@ gulp.task('watch', gulp.parallel('watch:css','watch:js'));
 gulp.task('serve', () => {
   return nodemon({
     script: './app.js',
-    ignore: ['assets/','dist/','views/']
+    ignore: ['assets/',buildDir,'views/']
   });
 });
 
