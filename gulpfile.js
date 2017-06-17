@@ -9,6 +9,7 @@ const stylint = require('gulp-stylint');
 const stylus  = require('gulp-stylus');
 const uglify  = require('gulp-uglify');
 
+// Vars/helper functions
 const assetTypes = ['css','fonts','img','js'];
 const buildDir = 'public';
 const getTasks = task => assetTypes.map(type => `${task}:${type}`);
@@ -25,6 +26,7 @@ gulp.task('clean', gulp.parallel(...getTasks('clean')));
 // Build tasks
 // - pipes Stylus files into CSS
 // - transpiles JS files down to ES5 compatibility
+// - moves fonts and images to public directory
 gulp.task('build:css', () => {
   return gulp.src('assets/css/**/*.styl')
     .pipe(stylus({ compress:true }))
@@ -74,12 +76,6 @@ assetTypes.forEach(dir => {
     gulp.watch(`assets/${dir}/**/*`, gulp.series(`build:${dir}`));
   });
 });
-// gulp.task('watch:css', () => {
-//   gulp.watch('assets/css/**/*.styl', gulp.series('build:css'));
-// });
-// gulp.task('watch:js', () => {
-//   gulp.watch('assets/js/**/*.js', gulp.series('build:js'));
-// });
 gulp.task('watch', gulp.parallel(...getTasks('watch')));
 
 // Serve task
@@ -95,5 +91,5 @@ gulp.task('serve', () => {
 // 1. Clean out the dist folder
 // 2. Build all assets
 // 3. Watch for file changes
+// 4. Serve the app
 gulp.task('default', gulp.series('clean','build', gulp.parallel('watch','serve')));
-
