@@ -1,0 +1,9 @@
+extends /views/partials/layout.pug
+
+prepend head
+  - page.title = 'Error';
+
+block content
+  h1= status
+  p= message
+  pre!= stackHighlighted
