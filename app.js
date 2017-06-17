@@ -1,7 +1,7 @@
 // Initial app setup
 const express   = require('express');
-const fetch     = require('node-fetch');
-const stylus    = require('stylus');
+const path      = require('path');
+const util      = require('./utility');
 
 const app = express();
 
@@ -10,73 +10,36 @@ app.set('port', (process.env.PORT || 3000));
 app.set('viewEngine', (process.env.VIEW_ENGINE || 'pug'))
 
 // Specify where static assets should be loaded from
-app.use(express.static('assets'));
-app.use('/assets', express.static('assets'));
+app.use(express.static('public'));
 
 // Set the views and views engine
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', app.get('viewEngine'));
-app.locals.basedir = __dirname;
 
-// Set up routes for the app
-// TODO: Use separate routes.js file???
-// main (root) route
-app.get('/', (req,res) => {
-  res.render('index');
-});
-// /apps routes
-app.get('/apps', (req,res) => {
-  res.render('apps');
-});
-app.get('/apps/:appName', (req,res) => {
-  res.render(`apps/${req.params.appName}`);
-});
-// /code routes
-app.get('/code', (req,res) => {
-  res.render('code');
-});
-// /blog routes
-app.get('/blog', (req,res) => {
-  res.render('blog');
-});
-// /about route
-app.get('/about', (req,res) => {
-  res.render('about');
+// Put cookies on req.cookies
+app.use(require('cookie-parser')());
+
+// Put utility functions on all requests
+app.use((req,res,next) => {
+  res.locals.util = util;
+  next();
 });
 
-app.get('/pkmn', async (req,res) => {
-  const baseUrl = 'http://pokeapi.co/api/v2/';
-  const path = req.query.path;
-  if (path) {
-    const url = baseUrl + path;
-    const resp = await fetch(url);
-    const data = await resp.json();
-    res.send(data);
-  } else {
-    res.status(404).render('404');
-  }
-  res.send(req.query.path);
+// Handle actual routing
+app.use('/', require('./controllers/routes'));
+
+// Handle routes not defined in router
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-// For CIT 261
-// app.get('/cit261', (req,res) => {
-//   res.render('cit261/index');
-// });
-// app.get('/cit261/:topic', (req,res) => {
-//   try {
-//     res.render(`cit261/${req.params.topic}`);
-//   } catch (err) {
-//     console.error(`An error occured while trying to render cit261/${req.params.topic}:`, err);
-//     res.render('404');
-//   }
-// });
+// Show error page depending on environment
+if (process.env.APP_ENV === 'dev') app.use(util.devErr);
+app.use(util.prodErr);
 
-// 404 handling - keep as last route
-app.use((req,res) => {
-  res.status(404).render('404');
-});
-
-// Start listening
-app.listen(app.get('port'), function() {
-  console.log('Portfolio site is running on port ', app.get('port'));
+// Start listening for requests
+app.listen(app.get('port'), () => {
+  console.log(`Express now running on port ${app.get('port')}`);
 });
