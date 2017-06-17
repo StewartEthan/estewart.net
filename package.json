@@ -30,13 +30,15 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
     "gulp-stylint": "^4.0.0",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "stylint-stylish": "^1.4.0"
   },
   "dependencies": {
     "ejs": "^2.5.6",
