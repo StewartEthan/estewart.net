@@ -29,7 +29,7 @@ router.get('/about', (req,res) => {
 });
 
 // Misc routes
-app.get('/pkmn', async (req,res) => {
+router.get('/pkmn', async (req,res) => {
   const baseUrl = 'http://pokeapi.co/api/v2/';
   const path = req.query.path;
   if (path) {
