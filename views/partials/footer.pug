@@ -15,6 +15,6 @@ footer.print-hide(role="contentinfo")
       each link in socials
         li.icon
           a(href=link.href target=link.target)
-            img(src=`/img/icons/${link.icon}.svg` alt=`${link.title} Logo` title=link.title)
-            //- != util.icon(link.icon) TODO style this
+            //- img(src=`/img/icons/${link.icon}.svg` alt=`${link.title} Logo` title=link.title)
+            != util.icon(link.icon)
     .icon-credit!= iconCredit
