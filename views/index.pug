@@ -4,8 +4,8 @@ prepend head
   - page.title = 'Home';
 
 block content
-  h1 Home Page
-  .flex.sp-between
+  .center-content
+    h1 Home Page
     p.
       This website is basically my web development sandbox. I make no
       guarantees on how often new stuff will be added, but anytime I
@@ -17,34 +17,16 @@ block content
       the purpose of that area of the site. Feel free to reach out to me
       using any of the icons in the footer below if you have any questions,
       feedback, or suggestions.
-    .twitter-wrapper
-      button.fake-link Hide Twitter feed
-      div <a class="twitter-timeline hide" data-lang="en" data-width="300" data-height="280" data-dnt="true" data-theme="dark" href="https://twitter.com/EStewart_23">Tweets by EStewart_23</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  style.
-    main > .content .flex > p {
-      margin: 0;
-      max-width: 450px;
-      text-align: justify;
-    }
-    .twitter-wrapper {
-      min-width: 300px;
-      position: relative;
-    }
-    @media screen and (max-width: 900px) {
-      .twitter-wrapper {
-        display: none;
+    style.
+      main > .content > * {
+        margin: 0 auto;
+        max-width: 40vw;
+        text-align: justify;
       }
-
-      main > .content .flex > p {
-        max-width: 100%;
+      main > .content > h1 {
+        padding: 20px;
+        text-align: center;
       }
-    }
-    .twitter-wrapper > button {
-      position: absolute;
-      top: -2rem;
-      text-align: right;
-      width: 100%;
-    }
   
 block scripts
   script.
