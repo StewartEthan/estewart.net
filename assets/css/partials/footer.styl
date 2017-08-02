@@ -28,5 +28,23 @@ footer
       justify-content space-around
       margin 15px 0
 
-      img
-        width 25px
+      a
+        --border-color transparent
+        
+        svg
+          border 1px solid var(--border-color)
+          padding 4px
+          transition 0.15s linear all
+          size(25px)
+
+        &:focus
+          --border-color white
+          outline none
+        
+        &:focus,
+        &:hover
+          svg
+            transform scale(1.25)
+
+            g > *
+              fill $gray-accent
