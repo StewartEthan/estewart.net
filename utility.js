@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 exports.catchErrors = fn => {
   return function(req, res, next) {
     return fn(req, res, next).catch(next);
@@ -29,4 +32,4 @@ exports.prodErr = (err, req, res, next) => {
   });
 };
 
-exports.icon = name => require('fs').readFileSync(`/img/icons/${name}.svg`);
+exports.icon = name => fs.readFileSync(`./public/img/icons/${name}.svg`);
