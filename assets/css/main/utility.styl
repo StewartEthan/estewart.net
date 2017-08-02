@@ -3,6 +3,9 @@ size(w, h = w)
   width w
 
 @media all
+  h1
+    padding 15px
+
   ul, ol
     &.no-pad
       -webkit-padding-start 0
@@ -18,6 +21,15 @@ size(w, h = w)
 
     li::before
       content "\27A5\00a0"
+  
+  .center-content
+    margin 0 auto
+    max-width 40vw
+
+    & > h1
+      text-align center
+    & > p
+      text-align justify
 
   .custom-button
     background-color $primary-blue
