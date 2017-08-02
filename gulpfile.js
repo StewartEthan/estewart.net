@@ -92,8 +92,8 @@ gulp.task('serve', () => {
 });
 
 // Default task
-// 1. Clean out the dist folder
-// 2. Build all assets
-// 3. Watch for file changes
-// 4. Serve the app
+// 1.  Clean out the dist folder
+// 2.  Build all assets
+// 3a. Watch for file changes
+// 3b. Serve the app
 gulp.task('default', gulp.series('clean','build', gulp.parallel('watch','serve')));
