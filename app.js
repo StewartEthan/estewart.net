@@ -10,9 +10,10 @@ app.set('port', (process.env.PORT || 3000));
 app.set('viewEngine', (process.env.VIEW_ENGINE || 'pug'))
 
 // Specify where static assets should be loaded from
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set the views and views engine
+app.locals.basedir = __dirname;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', app.get('viewEngine'));
 

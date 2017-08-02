@@ -19,7 +19,7 @@ meta(
 link(
   rel="stylesheet"
   type="text/css"
-  href="/css/compiled/style.css"
+  href="/css/style.css"
 )
 
 if assets.css.length
@@ -27,12 +27,12 @@ if assets.css.length
     link(
       rel="stylesheet"
       type="text/css"
-      href=`${'/public/'}style`
+      href=`/public/'${style}`
     )
 
 link(
   rel="icon"
-  href="/assets/img/favicon.ico"
+  href="/img/favicon.ico"
 )
 
 //- See https://goo.gl/OOhYW5 to implement manifest for native app behavior

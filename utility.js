@@ -29,4 +29,4 @@ exports.prodErr = (err, req, res, next) => {
   });
 };
 
-exports.icon = name => require('fs').readFileSync(`./public/img/icons/${name}.svg`);
+exports.icon = name => require('fs').readFileSync(`/img/icons/${name}.svg`);
