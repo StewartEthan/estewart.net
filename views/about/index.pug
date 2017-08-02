@@ -4,6 +4,16 @@ prepend head
   - page.title = 'About';
 
 block content
+  -
+    const facts = [
+      { key: 'Name', value: 'Ethan Stewart' },
+      { key: 'Raised', value: 'Eastern Idaho' },
+      { key: 'College', value: 'Brigham Young University - Idaho' },
+      { key: 'Degree', value: 'Bachelor\'s of Science, Computer Information Technology' },
+      { key: 'Current Location', value: 'Pleasant Grove, UT' },
+      { key: 'Employer', value: 'FamilySearch' },
+      { key: 'Position', value: 'Web Developer' }
+    ];
   .center-content
     h1 About
     p.
@@ -11,3 +21,12 @@ block content
       that I will be working on), this page will contain information
       about me, about this site (such as technologies/libraries used
       and so on), and best ways to contact me.
+    section.about-me
+      each fact in facts
+        .fact
+          strong #{fact.key}:&nbsp;
+          span #{fact.value}
+
+    section.about-site
+
+    section.contact
