@@ -12,6 +12,8 @@ const uglify  = require('gulp-uglify');
 // Vars/helper functions
 const assetTypes = ['css','fonts','img','js'];
 const buildDir = 'public';
+const gulpTask = process.argv.slice(2) || 'default';
+
 const getTasks = task => assetTypes.map(type => `${task}:${type}`);
 const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
 
@@ -29,7 +31,7 @@ gulp.task('clean', gulp.parallel(...getTasks('clean')));
 // - moves fonts and images to public directory
 gulp.task('build:css', () => {
   return gulp.src('assets/css/**/*.styl')
-    .pipe(stylus({ compress:true }))
+    .pipe(stylus({ compress: gulpTask === 'prod' }))
     .pipe(gulp.dest(`${buildDir}/css`))
     .on('error', logErr);
 });
@@ -46,7 +48,7 @@ gulp.task('build:img', () => {
 gulp.task('build:js', () => {
   return gulp.src('assets/js/**/*.js')
     .pipe(babel({ presets:['es2015'] }))
-    .pipe(uglify())
+    .pipe(gulpTask === 'prod' ? uglify() : gutil.noop())
     .pipe(gulp.dest(`${buildDir}/js`))
     .on('error', logErr);
 });
@@ -90,6 +92,10 @@ gulp.task('serve', () => {
     ignore: ['assets/',buildDir,'views/']
   });
 });
+
+// Prod task
+// For deploying on production
+gulp.task('prod', gulp.series('clean','build'));
 
 // Default task
 // 1.  Clean out the dist folder
