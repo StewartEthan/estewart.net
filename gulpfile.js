@@ -3,7 +3,7 @@ const babel   = require('gulp-babel');
 const del     = require('del');
 const gulp    = require('gulp');
 const gutil   = require('gulp-util');
-const jsh     = require('gulp-jshint');
+// const jsh     = require('gulp-jshint');
 const nodemon = require('gulp-nodemon'); 
 const stylint = require('gulp-stylint');
 const stylus  = require('gulp-stylus');
@@ -54,22 +54,22 @@ gulp.task('build:js', () => {
 });
 gulp.task('build', gulp.parallel(...getTasks('build')));
 
-// Eval tasks
-// Useful for error checking in
-// case of build fails or whatever
-gulp.task('eval:js', () => {
-  return gulp.src('assets/js/**/*.js')
-    .pipe(jsh({esversion: 6}))
-    .pipe(jsh.reporter('jshint-stylish'))
-    .on('error', logErr);
-});
-gulp.task('eval:stylus', () => {
-  return gulp.src('assets/css/**/*.styl')
-    .pipe(stylint({ config: './.stylintrc' }))
-    .pipe(stylint.reporter())
-    .on('error', logErr);
-});
-gulp.task('eval', gulp.series('eval:js','eval:stylus'));
+// // Eval tasks
+// // Useful for error checking in
+// // case of build fails or whatever
+// gulp.task('eval:js', () => {
+//   return gulp.src('assets/js/**/*.js')
+//     .pipe(jsh({esversion: 6}))
+//     .pipe(jsh.reporter('jshint-stylish'))
+//     .on('error', logErr);
+// });
+// gulp.task('eval:stylus', () => {
+//   return gulp.src('assets/css/**/*.styl')
+//     .pipe(stylint({ config: './.stylintrc' }))
+//     .pipe(stylint.reporter())
+//     .on('error', logErr);
+// });
+// gulp.task('eval', gulp.series('eval:js','eval:stylus'));
 
 // Watch task
 // For rebuilding assets on file changes
