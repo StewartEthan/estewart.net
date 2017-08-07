@@ -27,7 +27,7 @@ if assets.css.length
     link(
       rel="stylesheet"
       type="text/css"
-      href=`/public/'${style}`
+      href=`/css/${style}.css`
     )
 
 link(
@@ -50,6 +50,6 @@ link(
 
 // Bring in utility functions unless explicitly rejected
 unless page.noUtilities
-  script(src="/assets/js/utility.js")
+  script(src="/js/utility.js")
 
 //- Polyfill loader may be added, or idea may be abandoned in favor of Babel
