@@ -1,31 +1,31 @@
 extends /views/partials/layout.pug
 
 prepend head
-  - page.title = 'About';
+  - 
+    page.title = 'About';
+    assets.css.push('about');
 
 block content
   -
     const facts = [
-      { key: 'Name', value: 'Ethan Stewart' },
-      { key: 'Raised', value: 'Eastern Idaho' },
-      { key: 'College', value: 'Brigham Young University - Idaho' },
-      { key: 'Degree', value: 'Bachelor\'s of Science, Computer Information Technology' },
-      { key: 'Current Location', value: 'Pleasant Grove, UT' },
-      { key: 'Employer', value: 'FamilySearch' },
-      { key: 'Position', value: 'Web Developer' }
+      { icon: 'nametag' , text: 'Ethan Stewart'                                    },
+      { icon: 'home'    , text: 'Eastern Idaho'                                    },
+      { icon: 'school'  , text: 'BS in Computer Information Technology, BYU-Idaho' },
+      { icon: 'location', text: 'Pleasant Grove, UT'                               },
+      { icon: 'work'    , text: 'Front-end web developer, FamilySearch'            }
     ];
   .center-content
     h1 About
-    p.
+    p.hide.
       In the near future (as in, this is the next part of my website
       that I will be working on), this page will contain information
       about me, about this site (such as technologies/libraries used
       and so on), and best ways to contact me.
-    section.about-me.hide
+    section.about-me
       each fact in facts
         .fact
-          strong #{fact.key}:&nbsp;
-          span #{fact.value}
+          != util.icon(fact.icon)
+          span #{fact.text}
 
     section.about-site.hide
 
