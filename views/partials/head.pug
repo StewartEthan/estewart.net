@@ -27,7 +27,7 @@ if assets.css.length
     link(
       rel="stylesheet"
       type="text/css"
-      href=`/css/${style}.css`
+      href=`/css/${style}.css`.replace(/(\.css){2,}$/gi, '.css')
     )
 
 link(
