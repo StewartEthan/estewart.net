@@ -1,7 +1,15 @@
 section
+  $border-width = 2px
+  $spacing-width = (50px - $border-width) / 2
+
   align-items center
   display flex
   justify-content space-between
+  margin-bottom $spacing-width
+
+  &:not(:last-child)
+    border-bottom $border-width solid #000 + 50%
+    padding-bottom $spacing-width
 
 .fact
   align-items center

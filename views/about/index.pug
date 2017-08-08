@@ -15,17 +15,12 @@ block content
       { icon: 'work'    , text: 'Front-end web developer, FamilySearch'            }
     ];
     const stackItems = [
-      'NodeJS with Express on the backend',
-      'Pug for templating',
-      'Stylus for CSS preprocessing',
-      'Babel for increased cross-browser compatibility'
+      '<strong>NodeJS</strong> with <strong>Express</strong> on the backend',
+      '<strong>Pug</strong> for templating',
+      '<strong>Stylus</strong> for CSS preprocessing',
+      '<strong>Babel</strong> for increased cross-browser compatibility'
     ];
   .center-content
-    p.hide.
-      In the near future (as in, this is the next part of my website
-      that I will be working on), this page will contain information
-      about me, about this site (such as technologies/libraries used
-      and so on), and best ways to contact me.
     section.about-me
       h2.section-name About Me
       .section-content
@@ -38,13 +33,13 @@ block content
       h2.section-name About This Site
       .section-content
         p.
-          This site serves as a sandbox in which I can experiment
-          and improve my skills as a web developer. While I try to
+          <strong>This site is a sandbox in which I can experiment
+          and improve my skills as a web developer.</strong> While I try to
           put my best efforts into all of my coding, the fact that
           this is mostly for practice projects and exploration of
-          things I don't yet understand, the use of any web apps,
+          things I don't yet understand, <strong>the use of any web apps,
           features, or anything else on this site should generally
-          be taken with a grain of salt unless I indicate that it
+          be taken with a grain of salt</strong> unless I indicate that it
           is production-quality (meaning I've tested it and feel
           comfortable calling it a finished product).
     
@@ -52,12 +47,25 @@ block content
       h2.section-name About My Stack
       .section-content
         p.
-          This site runs on a pretty straightforward Node-based setup.
+          This site runs on a pretty straightforward <strong>Node-based setup.</strong>
           In no particular order, here are the main libraries/frameworks
           being used;
         ul.stack-items
           each item in stackItems
-            li= item
-        p The source code for this site can be found <a href="https://github.com/StewartEthan/estewart.net">on GitHub</a>.
+            li!= item
+        p The source code for this site can be found <a href="https://github.com/StewartEthan/estewart.net">on GitHub.</a>
 
-    section.contact.hide
+    section.contact
+      h2.section-name Contact Me
+      .section-content
+        p.
+          If you have any questions, comments, suggestions, complaints, ideas,
+          epiphanies, visions, discoveries of magical powers, or other things
+          you'd like to share with me for some reason, <strong>please use any of the
+          icons in the footer to reach out.</strong> I do have a wife, a full-time job,
+          and a few hobbies, so I may not always answer immediately, but unless
+          I'm camping in the middle of nowhere, I'll likely respond to anything
+          within a day or two. <strong>Twitter is probably the best way to reach me</strong>,
+          but if you don't use Twitter, email is probably your best bet. LinkedIn is
+          probably not going to get a response from me unless I'm actively seeking
+          a job. Thanks for visiting my site!
