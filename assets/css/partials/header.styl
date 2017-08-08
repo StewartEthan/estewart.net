@@ -15,6 +15,7 @@ header
     justify-content center
 
     a
+      border 2px solid transparent
       color white
       display flex
       font-size 6em
@@ -26,6 +27,17 @@ header
         content '{'
       &::after
         content '}'
+      &::before,
+      &::after
+        transition transform 150ms ease-in-out
+
+      &:hover
+        &::before, &::after
+          transform scale(1.15)
+      &:focus
+        border-color #fff
+        border-radius 5px
+        outline none
 
       img
         margin auto
