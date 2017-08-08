@@ -36,9 +36,18 @@ body
           font-family $heading-font
 
         a
-          color $primary-blue
+          border-bottom 2px solid transparent
+          // color $primary-blue + 20%
+          color $logo-color - 10%
           font-family "Trebuchet MS", Helvetica, sans-serif
           font-size 13pt
+          text-decoration none
+          transition border-bottom-color 150ms ease-in-out, color 200ms ease-in-out
+
+          &:hover
+            $text-dec-color = $logo-color - 50%
+            border-bottom-color $text-dec-color
+            color $text-dec-color
 
 @media print
   .print-hide
