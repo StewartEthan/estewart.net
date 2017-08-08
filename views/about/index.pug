@@ -14,19 +14,50 @@ block content
       { icon: 'location', text: 'Pleasant Grove, UT'                               },
       { icon: 'work'    , text: 'Front-end web developer, FamilySearch'            }
     ];
+    const stackItems = [
+      'NodeJS with Express on the backend',
+      'Pug for templating',
+      'Stylus for CSS preprocessing',
+      'Babel for increased cross-browser compatibility'
+    ];
   .center-content
-    h1 About
     p.hide.
       In the near future (as in, this is the next part of my website
       that I will be working on), this page will contain information
       about me, about this site (such as technologies/libraries used
       and so on), and best ways to contact me.
     section.about-me
-      each fact in facts
-        .fact
-          != util.icon(fact.icon)
-          span #{fact.text}
+      h2.section-name About Me
+      .section-content
+        each fact in facts
+          .fact
+            != util.icon(fact.icon)
+            span #{fact.text}
 
-    section.about-site.hide
+    section.about-site
+      h2.section-name About This Site
+      .section-content
+        p.
+          This site serves as a sandbox in which I can experiment
+          and improve my skills as a web developer. While I try to
+          put my best efforts into all of my coding, the fact that
+          this is mostly for practice projects and exploration of
+          things I don't yet understand, the use of any web apps,
+          features, or anything else on this site should generally
+          be taken with a grain of salt unless I indicate that it
+          is production-quality (meaning I've tested it and feel
+          comfortable calling it a finished product).
+    
+    section.about-stack
+      h2.section-name About My Stack
+      .section-content
+        p.
+          This site runs on a pretty straightforward Node-based setup.
+          In no particular order, here are the main libraries/frameworks
+          being used;
+        ul.stack-items
+          each item in stackItems
+            li= item
+        p The source code for this site can be found <a href="https://github.com/StewartEthan/estewart.net">on GitHub</a>.
 
     section.contact.hide
