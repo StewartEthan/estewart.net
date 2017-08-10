@@ -1,0 +1,36 @@
+-Multiple shopping lists
+-Ability to edit/reorder the list 
+-ability to attach a price to an item on a list 
+-adjustable quantities and calculation based on price
+-3 different ways to mark a single item 
+  1. On the list
+  2. High lighted that I need to pick up that item
+  3. Crossing the item off as put into my cart
+(I like to keep a list of everything I buy at a given store, but
+ I might not need to pick up everything on the list every time I go. 
+ So the highlighting feature can be like a 3-way lightbulb: 
+ dimmest setting shows every item on the list, middle setting checks 
+ off what you need to get on the list, and a pale running total to 
+ show the estimated amount of money you'll spend, and the highest 
+ setting would have a darkened or boldly shown total to indicate 
+ how much what is in your cart costs.)
+
+-running tally calculated from that 3rd highlighted feature to 
+ give me the total cost of purchase. 
+-possible feature to click if I want total calculated with sales tax
+-ability to sort lists into categories such as dry goods or produce
+ or frozen foods. 
+-ability to edit and change prices
+-some apps I've seen have the ability to compare prices by the unit
+ ($2/pound or $0.36/oz.) I'd like the ability to compare costs between
+  lists of different stores (I.e.: does this cereal cost more or less at 
+  Costco, can find it for cheaper at Walmart?)
+-ability to email or send in messenger the list to someone else
+ (husband offers to stop by the grocery store and asks what we need, 
+ I send him that medium list that checks off what we need to get, not 
+ everything I buy at a grocery store.) 
+-customizable background settings, because grocery lists usually 
+don't look like computers, and it helps with likability. 
+-ability to "zoom out" to see that middle highlighted list without 
+the prices so you can see at a glance the whole list, not just 5 items 
+on the list. 
