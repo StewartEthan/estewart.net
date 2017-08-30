@@ -28,19 +28,4 @@ router.get('/about', (req,res) => {
   res.render('about');
 });
 
-// Misc routes
-router.get('/pkmn', async (req,res) => {
-  const baseUrl = 'http://pokeapi.co/api/v2/';
-  const path = req.query.path;
-  if (path) {
-    const url = baseUrl + path;
-    const resp = await fetch(url);
-    const data = await resp.json();
-    res.send(data);
-  } else {
-    res.status(404).render('404');
-  }
-  res.send(req.query.path);
-});
-
 module.exports = router;
