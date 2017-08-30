@@ -1,0 +1,9 @@
+extends /views/partials/layout.pug
+
+prepend head
+  -
+    page.title = 'Grocery Helper';
+    assets.js.push('/components/GroceryHelper.js');
+
+block content
+  #app
