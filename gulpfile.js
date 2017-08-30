@@ -10,9 +10,9 @@ const stylus  = require('gulp-stylus');
 const uglify  = require('gulp-uglify');
 
 // Vars/helper functions
-const assetTypes = ['css','fonts','img','js'];
+const assetTypes = ['components','css','fonts','img','js'];
 const buildDir = 'public';
-const gulpTask = process.argv.slice(2) || 'default';
+const gulpTask = process.argv.slice(2)[0] || 'default';
 
 const getTasks = task => assetTypes.map(type => `${task}:${type}`);
 const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
@@ -27,8 +27,19 @@ gulp.task('clean', gulp.parallel(...getTasks('clean')));
 
 // Build tasks
 // - pipes Stylus files into CSS
-// - transpiles JS files down to ES5 compatibility
+// - transpiles JS files down to ES5
+// - transpiles Preact components to ES5
 // - moves fonts and images to public directory
+gulp.task('build:components', () => {
+  return gulp.src('assets/components/**/*.js')
+    .pipe(babel({
+      presets:['es2015','react'],
+      plugins: [['transform-react-jsx', { pragma: 'h' }]]
+    }))
+    .pipe(gulpTask === 'prod' ? uglify() : gutil.noop())
+    .pipe(gulp.dest(`${buildDir}/components`))
+    .on('error', logErr);
+});
 gulp.task('build:css', () => {
   return gulp.src('assets/css/**/*.styl')
     .pipe(stylus({ compress: gulpTask === 'prod' }))
