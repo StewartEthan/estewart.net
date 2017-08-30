@@ -1,13 +1,15 @@
 // Dependencies
-const babel   = require('gulp-babel');
-const del     = require('del');
-const gulp    = require('gulp');
-const gutil   = require('gulp-util');
-const jsh     = require('gulp-jshint');
-const nodemon = require('gulp-nodemon'); 
-const stylint = require('gulp-stylint');
-const stylus  = require('gulp-stylus');
-const uglify  = require('gulp-uglify');
+const babel       = require('gulp-babel');
+const del         = require('del');
+const gulp        = require('gulp');
+const gutil       = require('gulp-util');
+const jsh         = require('gulp-jshint');
+const nodemon     = require('gulp-nodemon');
+const replaceName = require('gulp-replace-name'); 
+const stylint     = require('gulp-stylint');
+const stylus      = require('gulp-stylus');
+const uglify      = require('gulp-uglify');
+const webpack     = require('gulp-webpack');
 
 // Vars/helper functions
 const assetTypes = ['components','css','fonts','img','js'];
@@ -31,12 +33,31 @@ gulp.task('clean', gulp.parallel(...getTasks('clean')));
 // - transpiles Preact components to ES5
 // - moves fonts and images to public directory
 gulp.task('build:components', () => {
-  return gulp.src('assets/components/**/*.js')
-    .pipe(babel({
-      presets:['es2015','react'],
-      plugins: [['transform-react-jsx', { pragma: 'h' }]]
+  return gulp.src('assets/components/**/*.comp.js')
+    // .pipe(babel({
+    //   presets: ['es2015','react'],
+    //   plugins: [['transform-react-jsx', { pragma: 'h' }]]
+    // }))
+    .pipe(webpack({
+      entry: {
+        GroceryHelper: './assets/components/GroceryHelper.comp.js'
+      },
+      output: {
+        filename: '[name].js'
+      },
+      module: {
+        loaders: [{
+          test: /\.comp\.js$/,
+          loader: 'babel',
+          query: {
+            presets: ['es2015','react'],
+            plugins: [['transform-react-jsx', { pragma: 'h' }]]
+          }
+        }]
+      }
     }))
     .pipe(gulpTask === 'prod' ? uglify() : gutil.noop())
+    .pipe(replaceName(/\.comp\.js/g, '.js'))
     .pipe(gulp.dest(`${buildDir}/components`))
     .on('error', logErr);
 });
