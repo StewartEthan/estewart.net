@@ -1,0 +1,21 @@
+-
+  const page = {};
+  const assets = {
+    css: [],
+    html: [],
+    js: []
+  };
+
+doctype html
+html
+  head
+    block head
+      include ./basic-head.pug
+
+  body
+    .wrapper
+    //- To be used for scripts not essential to TTI, for performance sake
+    block scripts
+      if assets.js.length
+        each script in assets.js
+          script(src=script)
