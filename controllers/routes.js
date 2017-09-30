@@ -43,6 +43,7 @@ router.get('/api/ldsconf', (req,res) => {
   };
 
   function tweetCb(err, tweets, response) {
+    if (err) res.json({ err, tweets, response });
     res.json(tweets);
   }
 
