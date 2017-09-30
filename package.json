@@ -46,6 +46,10 @@
     "nodemon": "^1.11.0",
     "preact": "^8.2.5",
     "pug": "^2.0.0-rc.2",
-    "stylint-stylish": "^1.4.0"
+    "stylint-stylish": "^1.4.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "simple-http-proxy": "^0.5.11"
   }
 }
