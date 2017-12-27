@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const catchErrors = fn => {
+exports.catchErrors = fn => {
   return function(req, res, next) {
     return fn(req, res, next).catch(next);
   };
 };
 
-const devErr = (err, req, res, next) => {
+exports.devErr = (err, req, res, next) => {
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,
@@ -24,7 +24,7 @@ const devErr = (err, req, res, next) => {
   });
 };
 
-const prodErr = (err, req, res, next) => {
+exports.prodErr = (err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
@@ -32,11 +32,4 @@ const prodErr = (err, req, res, next) => {
   });
 };
 
-const icon = name => fs.readFileSync(`./public/img/icons/${name}.svg`);
-
-module.exports = {
-  catchErrors,
-  devErr,
-  prodErr,
-  icon
-};
+exports.icon = name => fs.readFileSync(`./public/img/icons/${name}.svg`);
