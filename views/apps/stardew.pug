@@ -1,0 +1,23 @@
+extend /views/partials/layout
+
+prepend head
+  -
+    page.title = 'Stardew Valley Reference (Unofficial)';
+    assets.css.push('apps/stardew');
+
+block content
+  h1 Stardew Valley Reference
+  p.
+    The first thing I want to do is make it abundantly clear that this is in no way
+    an official guide or reference in any way, nor do I make any money from it. I'm
+    just a big fan of the game and decided to make a REST API reference for the game
+    as a personal side project. The purpose of this page is to demonstrate the different
+    requests that can be made with this API. This page is actually the first part of
+    this project that I'm creating, and as I finish parts of the API, I will add sections
+    (or additional search boxes to existing sections) below to use the new functionality
+  
+  .api-sections
+    .villagers
+      h2 Villagers
+      
+    
