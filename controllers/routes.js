@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 // main (root) route
 router.get('/', (req,res) => {
+  console.log('\n\n\nHELLO\n\n\n');
   res.render('index');
 });
 

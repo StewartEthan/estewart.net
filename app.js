@@ -1,10 +1,15 @@
 // Initial app setup
-const express   = require('express');
-const session = require('express-session');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
-const path      = require('path');
-const util      = require('./utility');
+const express      = require('express');
+const session      = require('express-session');
+const mongoose     = require('mongoose');
+const MongoStore   = require('connect-mongo')(session);
+const path         = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+
+const util         = require('./utility');
+
+require('dotenv').config();
 
 const app = express();
 
@@ -23,20 +28,26 @@ app.set('view engine', app.get('viewEngine'));
 // Put cookies on req.cookies
 app.use(require('cookie-parser')());
 
-// Set up session management (mainly for use with MongoDB)
-app.use(session({
-  secret: process.env.SECRET,
-  key: process.env.KEY,
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
-
 // Put utility functions on all requests
 app.use((req,res,next) => {
   res.locals.util = util;
   next();
 });
+
+
+// Set up some session stuff
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Set up session management (mainly for use with MongoDB)
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  key: process.env.SESSION_KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 
 // Handle actual routing
 app.use('/', require('./controllers/routes'));
@@ -54,7 +65,7 @@ app.use(util.prodErr);
 
 // Connect to Stardew Valley database
 // TODO: Look into making this connection in the API controller?
-mongoose.connect(process.env.STARDEW_DATABASE);
+mongoose.connect(process.env.STARDEW_DATABASE, { useMongoClient: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
