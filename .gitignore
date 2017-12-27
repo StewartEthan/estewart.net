@@ -8,6 +8,9 @@ public/
 # Whatever the crap Thumbs.db is...
 Thumbs.db
 
+# Editor settings
+.vscode
+
 # Logs
 logs
 *.log
