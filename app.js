@@ -1,5 +1,8 @@
 // Initial app setup
 const express   = require('express');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 const path      = require('path');
 const util      = require('./utility');
 
@@ -20,6 +23,15 @@ app.set('view engine', app.get('viewEngine'));
 // Put cookies on req.cookies
 app.use(require('cookie-parser')());
 
+// Set up session management (mainly for use with MongoDB)
+app.use(session({
+  secret: process.env.SECRET,
+  key: process.env.KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
 // Put utility functions on all requests
 app.use((req,res,next) => {
   res.locals.util = util;
@@ -39,6 +51,17 @@ app.use((req, res, next) => {
 // Show error page depending on environment
 if (process.env.APP_ENV === 'dev') app.use(util.devErr);
 app.use(util.prodErr);
+
+// Connect to Stardew Valley database
+// TODO: Look into making this connection in the API controller?
+mongoose.connect(process.env.STARDEW_DATABASE);
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on('error', (err) => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+});
+
+// TODO: Import all Stardew models as they're created
+require('./models/Villagers');
 
 // Start listening for requests
 app.listen(app.get('port'), () => {
