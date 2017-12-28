@@ -14,10 +14,9 @@ input
   font-size 1em
   padding 7px
 
-  // &[type="submit"]
-  //   background $logo-color
-  //   color white
-  //   padding 10px
+input[type="checkbox"] + label
+  cursor pointer
+  margin-left 5px
 
 ul, ol
   &.no-pad
@@ -47,26 +46,37 @@ ul, ol
   +break($normal)
     max-width 40vw
 
-.e-btn
-  background $gray-accent + 70%
-  border 1px solid $gray-accent + 25%
-  border-radius 6px
-  cursor pointer
-  font-size calc(1em - 0.25px)
-  letter-spacing 0.25px
-  padding 7px 10px
-  text-align center
-  transition filter 100ms linear
+.e // Doing it like this so if I ever change my prefix, I only have to change it once
+  &-btn
+    background $btn-bkgd-color
+    border 1px solid $btn-bdr-color
+    border-radius 6px
+    cursor pointer
+    font-size calc(1em - 0.25px)
+    letter-spacing 0.25px
+    padding 7px 10px
+    text-align center
+    transition filter 100ms linear
 
-  &--cta
-    background $logo-color
-    border none
-    color white
-    font-size 1em
-    text-shadow 1px 1px 1px #333
+    &--cta
+      background $cta-btn-color
+      border none
+      color white
+      font-size 1em
+      text-shadow 1px 1px 1px #333
+
+    &:hover
+      filter brightness(90%)
   
-  &:hover
-    filter brightness(90%)
+  &-card
+    --shadow-offset 1px
+    border-radius 6px
+    box-shadow var(--shadow-offset) var(--shadow-offset) 4px 1px $gray-accent + 25%
+    padding 15px
+
+    &--small
+      --shadow-offset 0.75px
+      padding 5px 10px
 
 .error
   color red
