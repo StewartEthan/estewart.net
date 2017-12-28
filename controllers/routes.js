@@ -16,7 +16,7 @@ router.get('/apps', (req,res) => {
   res.render('apps');
 });
 router.get('/apps/:appName', async (req,res,next) => {
-  if (/-admin$/.test(req.params.appName)) return next();
+  if (/-admin$/.test(req.params.appName)) next(); // Skip any attempts to go directly to admin pages
 
   const isAdminReq = 'admin' in req.query;
   const { appName } = req.params;

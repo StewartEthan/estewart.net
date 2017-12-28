@@ -1,7 +1,6 @@
 /* globals require exports */
 
 const fs = require('fs');
-const path = require('path');
 
 exports.catchErrors = fn => {
   return function(req, res, next) {
