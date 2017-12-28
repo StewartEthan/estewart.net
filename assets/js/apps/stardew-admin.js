@@ -4,6 +4,7 @@
   // Elements
   const addVillagerBtn = document.querySelector('.create-villager');
   const villagerForm = document.querySelector('form.edit-villager');
+  const cancelChangesBtn = villagerForm.querySelector('.cancel-changes');
   const createVillagerBtn = villagerForm.querySelector('.create-villager');
   const updateVillagerBtn = villagerForm.querySelector('.update-villager');
   const villagerList = document.querySelector('.villager-list');
@@ -15,6 +16,7 @@
 
   // Event listeners
   addVillagerBtn.addEventListener('click', handleAddVillager);
+  cancelChangesBtn.addEventListener('click', handleCancelChanges);
   villagerDelBtns.forEach(btn => btn.addEventListener('click', handleDeleteVillager));
   villagerEditBtns.forEach(btn => btn.addEventListener('click', handleEditVillager));
   villagerForm.addEventListener('submit', handleSubmitVillager);
@@ -27,6 +29,11 @@
 
     currentVillagerId = '';
     villagerForm.reset();
+  }
+
+  function handleCancelChanges(e) {
+    villagerForm.reset();
+    villagerForm.classList.add('invis');
   }
 
   function handleDeleteVillager(e) {}
