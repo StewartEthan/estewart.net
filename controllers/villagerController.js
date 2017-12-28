@@ -6,7 +6,7 @@ const Villager = mongoose.model('Villager');
 exports.createVillager = async (req,res) => {
   const villager = new Villager(req.body);
   await villager.save();
-  res.send(201);
+  res.sendStatus(201);
 };
 
 exports.getAllVillagers = async (req,res) => {
@@ -27,4 +27,16 @@ exports.getVillagerByName = async name => {
 exports.getOneVillager = async (req,res) => {
   const villagers = await exports.getVillagerByName(req.params.name);
   res.json(villagers[0] || null);
+};
+
+exports.updateVillager = async (req,res) => {
+  const { id } = req.params;
+  const newData = { $set: req.body };
+  const updated = await Villager.findByIdAndUpdate(id, newData, { new: true });
+  res.json(updated);
+};
+
+exports.deleteVillager = async (req,res) => {
+  await Villager.findByIdAndRemove(req.params.id);
+  res.sendStatus(204);
 };

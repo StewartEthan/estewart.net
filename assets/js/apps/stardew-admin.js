@@ -63,11 +63,14 @@
       region: { value: region },
       address: { value: address }
     } = e.target;
+    const url = currentVillager
+      ? `/stardew/villager/${currentVillager._id}`
+      : '/stardew/villager';
     const method = currentVillager ? 'PUT' : 'POST';
     const body = JSON.stringify({ name, birthday, region, address });
     const headers = { 'Content-Type': 'application/json' };
-    
-    fetch('/stardew/villager', { method, body, headers });
+  
+    fetch(url, { method, body, headers });
   }
 
   function setCurrentVillager(element) {

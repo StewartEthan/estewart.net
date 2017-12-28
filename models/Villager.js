@@ -28,7 +28,9 @@ const villagerSchema = new mongoose.Schema({
     required: requiredFieldError`address`
   },
   // friends: {
-  //   type: [String],
+  //   type: [
+  //     { type: mongoose.Schema.ObjectId, ref: 'Villager' }
+  //   ],
   //   required: requiredFieldError`friends`
   // },
   // single: {
