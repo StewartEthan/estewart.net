@@ -1,3 +1,5 @@
+/* globals require process*/
+
 // Dependencies
 const babel       = require('gulp-babel');
 const del         = require('del');
@@ -5,14 +7,14 @@ const gulp        = require('gulp');
 const gutil       = require('gulp-util');
 const jsh         = require('gulp-jshint');
 const nodemon     = require('gulp-nodemon');
-const replaceName = require('gulp-replace-name'); 
+const replaceName = require('gulp-replace-name');
 const stylint     = require('gulp-stylint');
 const stylus      = require('gulp-stylus');
 const uglify      = require('gulp-uglify');
 const webpack     = require('gulp-webpack');
 
 // Vars/helper functions
-const assetTypes = ['components','css','fonts','img','js'];
+const assetTypes = [ 'components','css','fonts','img','js' ];
 const buildDir = 'public';
 const gulpTask = process.argv.slice(2)[0] || 'default';
 
@@ -23,13 +25,13 @@ const logErr = err => gutil.log(gutil.colors.red('[Error]'), err.toString());
 // For cleaning out the dist folder, either
 // in parts or as a whole
 assetTypes.forEach(dir => {
-  gulp.task(`clean:${dir}`, () => del([`${buildDir}/${dir}/**/*`]));
+  gulp.task(`clean:${dir}`, () => del([ `${buildDir}/${dir}/**/*` ]));
 });
 gulp.task('clean', gulp.parallel(...getTasks('clean')));
 
 // Build tasks
 // - pipes Stylus files into CSS
-// - transpiles JS files down to ES5
+// - transpiles JS files down to ES5 on prod
 // - transpiles Preact components to ES5
 // - moves fonts and images to public directory
 gulp.task('build:components', () => {
@@ -40,7 +42,8 @@ gulp.task('build:components', () => {
     // }))
     .pipe(webpack({
       entry: {
-        GroceryHelper: './assets/components/GroceryHelper.comp.js'
+        GroceryHelper: './assets/components/GroceryHelper.comp.js',
+        StardewAdmin: './assets/components/StardewAdmin.comp.js'
       },
       output: {
         filename: '[name].js'
@@ -50,8 +53,8 @@ gulp.task('build:components', () => {
           test: /\.comp\.js$/,
           loader: 'babel',
           query: {
-            presets: ['es2015','react'],
-            plugins: [['transform-react-jsx', { pragma: 'h' }]]
+            presets: [ 'env','react' ],
+            plugins: [[ 'transform-react-jsx', { pragma: 'h' }]]
           }
         }]
       }
@@ -79,7 +82,7 @@ gulp.task('build:img', () => {
 });
 gulp.task('build:js', () => {
   return gulp.src('assets/js/**/*.js')
-    .pipe(babel({ presets:['es2015'] }))
+    .pipe(gulpTask === 'prod' ? babel({ presets: [ 'env' ] }) : gutil.noop())
     .pipe(gulpTask === 'prod' ? uglify() : gutil.noop())
     .pipe(gulp.dest(`${buildDir}/js`))
     .on('error', logErr);
@@ -121,7 +124,7 @@ gulp.task('rebuild', gulp.series('clean','build'));
 gulp.task('serve', () => {
   return nodemon({
     script: './app.js',
-    ignore: ['assets/',buildDir,'views/']
+    ignore: [ 'assets/',buildDir,'views/' ]
   });
 });
 
