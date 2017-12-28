@@ -14,8 +14,7 @@ const villagerSchema = new mongoose.Schema({
   },
   birthday: {
     type: String,
-    trim: true,
-    required: requiredFieldError`birthday`
+    trim: true
   },
   region: {
     type: String,
@@ -24,8 +23,7 @@ const villagerSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    trim: true,
-    required: requiredFieldError`address`
+    trim: true
   },
   // friends: {
   //   type: [
@@ -33,13 +31,12 @@ const villagerSchema = new mongoose.Schema({
   //   ],
   //   required: requiredFieldError`friends`
   // },
-  // single: {
-  //   type: Boolean,
-  //   required: requiredFieldError`single`
-  // },
+  single: {
+    type: Boolean,
+    required: requiredFieldError`single`
+  },
   // friendship: {
-  //   type: Object,
-  //   required: requiredFieldError`friendship`
+  //   type: Object
   // }
 });
 
