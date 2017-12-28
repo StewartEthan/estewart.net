@@ -19,11 +19,18 @@ block content
             span= villager.name
             button.e-btn.edit-btn Edit
             button.e-btn.del-btn Delete
+            
       form.edit-villager.invis
         input(type="text" name="name" placeholder="Name")
         input(type="text" name="birthday" placeholder="Birthday")
         input(type="text" name="region" placeholder="Region")
+        //- select
+        //-   each region in ['Beach','Calico Desert','Cindersap Forest','Mines','Mountain','Pelican Town','Sewers','Witch\'s Swamp']
+        //-     option(value=region)= region
         input(type="text" name="address" placeholder="Address")
+        .marriage.e-card.e-card--small
+          input(type="checkbox" name="single" id="single")
+          label(for="single") Single and ready to mingle
         .controls
           input.e-btn.e-btn--cta.create-villager(type="submit" value="Create Villager")
           input.e-btn.e-btn--cta.update-villager.hide(type="submit" value="Save Changes")

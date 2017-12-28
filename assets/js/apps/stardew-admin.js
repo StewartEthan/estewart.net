@@ -53,6 +53,7 @@
     [ 'name','birthday','region','address' ].forEach(field => {
       villagerForm[field].value = currentVillager[field];
     });
+    villagerForm.single.checked = currentVillager.single;
   }
   
   function handleSubmitVillager(e) {
@@ -61,13 +62,14 @@
       name: { value: name },
       birthday: { value: birthday },
       region: { value: region },
-      address: { value: address }
+      address: { value: address },
+      single: { checked: single }
     } = e.target;
     const url = currentVillager
       ? `/stardew/villager/${currentVillager._id}`
       : '/stardew/villager';
     const method = currentVillager ? 'PUT' : 'POST';
-    const body = JSON.stringify({ name, birthday, region, address });
+    const body = JSON.stringify({ name, birthday, region, address, single });
     const headers = { 'Content-Type': 'application/json' };
   
     fetch(url, { method, body, headers });
