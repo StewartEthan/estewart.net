@@ -41,4 +41,9 @@ const villagerSchema = new mongoose.Schema({
   // }
 });
 
+// Define indexes
+villagerSchema.index({
+  name: 'text'
+});
+
 module.exports = mongoose.model('Villager', villagerSchema);

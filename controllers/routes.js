@@ -3,7 +3,7 @@
 // eslint-disable-next-line
 const router = require('express').Router();
 
-const { createVillager } = require('./villagerController');
+const { createVillager, getAllVillagers, searchVillagers } = require('./villagerController');
 
 // main (root) route
 router.get('/', (req,res) => {
@@ -25,6 +25,8 @@ router.get('/apps/:appName', (req,res,next) => {
 });
 
 // /stardew routes
+router.get('/stardew/villager/all', getAllVillagers);
+router.get('/stardew/villager/:name', searchVillagers);
 router.post('/stardew/villager', createVillager);
 
 // /code routes
