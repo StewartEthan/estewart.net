@@ -12,7 +12,7 @@
   const villagerEditBtns = villagerList.querySelectorAll('.edit-btn');
 
   // Variables
-  let currentVillagerId = '';
+  let currentVillager = null;
 
   // Event listeners
   addVillagerBtn.addEventListener('click', handleAddVillager);
@@ -27,7 +27,7 @@
     updateVillagerBtn.classList.add('hide');
     createVillagerBtn.classList.remove('hide');
 
-    currentVillagerId = '';
+    setCurrentVillager(null);
     villagerForm.reset();
   }
 
@@ -36,19 +36,22 @@
     villagerForm.classList.add('invis');
   }
 
-  function handleDeleteVillager(e) {}
+  async function handleDeleteVillager(e) {
+    const { _id: id } = JSON.parse(e.target.parentElement.dataset.villager);
+    const res = await fetch(`/stardew/villager/${id}`, { method: 'DELETE' });
+    console.log('res', res);
+  }
 
   function handleEditVillager(e) {
     villagerForm.classList.remove('invis');
     updateVillagerBtn.classList.remove('hide');
     createVillagerBtn.classList.add('hide');
 
-    const villager = JSON.parse(e.target.parentElement.dataset.villager);
-    currentVillagerId = villager._id;
+    setCurrentVillager(e.target.parentElement);
 
     // const { name, birthday, region, address } = villager;
     [ 'name','birthday','region','address' ].forEach(field => {
-      villagerForm[field].value = villager[field];
+      villagerForm[field].value = currentVillager[field];
     });
   }
   
@@ -60,10 +63,16 @@
       region: { value: region },
       address: { value: address }
     } = e.target;
-    const method = currentVillagerId.length > 0 ? 'PUT' : 'POST';
+    const method = currentVillager ? 'PUT' : 'POST';
     const body = JSON.stringify({ name, birthday, region, address });
     const headers = { 'Content-Type': 'application/json' };
     
     fetch('/stardew/villager', { method, body, headers });
+  }
+
+  function setCurrentVillager(element) {
+    currentVillager = element
+      ? JSON.parse(element.dataset.villager)
+      : element;
   }
 }(document));
