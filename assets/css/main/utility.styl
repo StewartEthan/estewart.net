@@ -10,13 +10,14 @@ h1
 
 input
   border 1px solid #ccc
-  border-radius 5px
-  padding 5px
+  border-radius 6px
+  font-size 1em
+  padding 7px
 
-  &[type="submit"]
-    background $logo-color
-    color white
-    padding 10px
+  // &[type="submit"]
+  //   background $logo-color
+  //   color white
+  //   padding 10px
 
 ul, ol
   &.no-pad
@@ -46,17 +47,22 @@ ul, ol
   +break($normal)
     max-width 40vw
 
-.custom-button
-  background-color $primary-blue
-  border none
+.e-btn
+  background $gray-accent + 70%
+  border 1px solid $gray-accent + 25%
   border-radius 6px
   cursor pointer
-  color white
-  font-size 1.2em
-  margin 10px
-  padding 7px
+  font-size calc(1em - 0.25px)
+  letter-spacing 0.25px
+  padding 7px 10px
   text-align center
-  text-shadow 1.5px 1.5px 3px #000
+
+  &--cta
+    background $logo-color
+    border none
+    color white
+    font-size 1em
+    text-shadow 1px 1px 1px #333
 
 .error
   color red
