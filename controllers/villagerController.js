@@ -10,11 +10,11 @@ exports.createVillager = async (req,res) => {
 };
 
 exports.getAllVillagers = async (req,res) => {
-  const villagers = await Villager.find({}).sort({ name: 1 });
+  const villagers = await exports.getVillagerByName('all');
   res.json(villagers);
 };
 
-const getVillagerByName = async name => {
+exports.getVillagerByName = async name => {
   // Below line can be used for sorting if partial matching ever becomes a thing
   // Use scoreOpt as second arg on `find` and as first arg on `sort` (chained)
   // const scoreOpt = { score: { $meta: 'textScore' } };
@@ -23,9 +23,8 @@ const getVillagerByName = async name => {
   const sortOpt = getAll ? { name: 1 } : {};
   return await Villager.find(query).sort(sortOpt);
 };
-exports.getVillagerByName = getVillagerByName;
 
-exports.searchVillagersRoute = async (req,res) => {
-  const villagers = await getVillagerByName(req.params.name);
+exports.getOneVillager = async (req,res) => {
+  const villagers = await exports.getVillagerByName(req.params.name);
   res.json(villagers[0] || null);
 };

@@ -4,7 +4,7 @@
 const router = require('express').Router();
 
 const { catchErrors } = require('../utility');
-const { createVillager, getAllVillagers, getVillagerByName, searchVillagers } = require('./villagerController');
+const { createVillager, getAllVillagers, getOneVillager, getVillagerByName } = require('./villagerController');
 
 // main (root) route
 router.get('/', (req,res) => {
@@ -24,7 +24,7 @@ router.get('/apps/:appName', async (req,res,next) => {
     ? `apps/${req.params.appName}-admin`
     : `apps/${req.params.appName}`;
   const props = {};
-  if (isAdminPage) {
+  if (file === 'apps/stardew-admin') {
     props.villagers = await getVillagerByName('all');
   }
   console.log(props);
@@ -33,7 +33,7 @@ router.get('/apps/:appName', async (req,res,next) => {
 
 // /stardew routes
 router.get('/stardew/villager/all', catchErrors(getAllVillagers));
-router.get('/stardew/villager/:name', catchErrors(searchVillagers));
+router.get('/stardew/villager/:name', catchErrors(getOneVillager));
 router.post('/stardew/villager', catchErrors(createVillager));
 
 // /code routes
