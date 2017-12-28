@@ -6,16 +6,13 @@ form
   input
     margin-bottom 5px
 
-.forms
-  display flex
+.villager-list
+  display grid
+  grid-row-gap 7px
+  width 30%
 
-  .add-villager
-    margin-right 10px
-  
   .villager
-    display flex
-    justify-content space-between
-    margin-bottom 5px
-
-    span
-      margin-right 5px
+    --villager-btn-width 25%
+    display grid
+    grid-column-gap 10px
+    grid-template-columns 1fr repeat(2, var(--villager-btn-width))

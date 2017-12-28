@@ -4,7 +4,7 @@
 const router = require('express').Router();
 
 const { catchErrors } = require('../utility');
-const { createVillager, getAllVillagers, searchVillagers } = require('./villagerController');
+const { createVillager, getAllVillagers, getVillagerByName, searchVillagers } = require('./villagerController');
 
 // main (root) route
 router.get('/', (req,res) => {
@@ -16,13 +16,19 @@ router.get('/', (req,res) => {
 router.get('/apps', (req,res) => {
   res.render('apps');
 });
-router.get('/apps/:appName', (req,res,next) => {
+router.get('/apps/:appName', async (req,res,next) => {
   if (/-admin$/.test(req.params.appName)) return next();
 
-  const file = ('admin' in req.query)
+  const isAdminPage = 'admin' in req.query;
+  const file = isAdminPage
     ? `apps/${req.params.appName}-admin`
     : `apps/${req.params.appName}`;
-  res.render(file);
+  const props = {};
+  if (isAdminPage) {
+    props.villagers = await getVillagerByName('all');
+  }
+  console.log(props);
+  res.render(file, props);
 });
 
 // /stardew routes

@@ -11,12 +11,18 @@ block content
 
   .villagers
     h2 Villagers
-    .forms
-      form.add-villager
-        input(type="text" name="name" placeholder="Name")
-        input(type="text" name="birthday" placeholder="Birthday")
-        input(type="text" name="region" placeholder="Region")
-        input(type="text" name="address" placeholder="Address")
-        input(type="submit" value="Create Villager")
+    .villager-list
+      each villager in villagers
+        .villager
+          span= villager.name
+          button(data-id=villager._id) Edit
+          button(data-id=villager._id) Delete
+    //- .forms
+      //- form.add-villager
+      //-   input(type="text" name="name" placeholder="Name")
+      //-   input(type="text" name="birthday" placeholder="Birthday")
+      //-   input(type="text" name="region" placeholder="Region")
+      //-   input(type="text" name="address" placeholder="Address")
+      //-   input(type="submit" value="Create Villager")
       
-      .villager-list
+      //- .villager-list
