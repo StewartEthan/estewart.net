@@ -1,3 +1,5 @@
+/* globals require process __dirname global */
+
 // Initial app setup
 const express      = require('express');
 const session      = require('express-session');
@@ -49,6 +51,17 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
+// Connect to Stardew Valley database
+// TODO: Look into making this connection in the API controller?
+mongoose.connect(process.env.STARDEW_DATABASE, { useMongoClient: true });
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on('error', (err) => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+});
+
+// TODO: Import all Stardew models as they're created
+require('./models/Villager');
+
 // Handle actual routing
 app.use('/', require('./controllers/routes'));
 
@@ -62,17 +75,6 @@ app.use((req, res, next) => {
 // Show error page depending on environment
 if (process.env.APP_ENV === 'dev') app.use(util.devErr);
 app.use(util.prodErr);
-
-// Connect to Stardew Valley database
-// TODO: Look into making this connection in the API controller?
-mongoose.connect(process.env.STARDEW_DATABASE, { useMongoClient: true });
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
-  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
-});
-
-// TODO: Import all Stardew models as they're created
-require('./models/Villagers');
 
 // Start listening for requests
 app.listen(app.get('port'), () => {

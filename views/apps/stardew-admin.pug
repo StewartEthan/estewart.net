@@ -1,0 +1,18 @@
+extend /views/partials/layout
+
+prepend head
+  -
+    page.title = 'Stardew Valley Data Admin'
+    assets.css.push('apps/stardew-admin')
+    assets.js.push('apps/stardew-admin')
+
+block content
+  h1 Stardew Valley API Admin
+
+  h2 Villagers
+  form.add-villager
+    input(type="text" name="name" placeholder="Name")
+    input(type="text" name="birthday" placeholder="Birthday")
+    input(type="text" name="region" placeholder="Region")
+    input(type="text" name="address" placeholder="Address")
+    input(type="submit" value="Create Villager")

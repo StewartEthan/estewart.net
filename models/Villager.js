@@ -1,8 +1,9 @@
+/* globals require, global, module */
+
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const vowels = [ 'a','e','i','o','u' ];
-const addArticle = str => (vowels.includes(str[0]) ? 'an ' : 'a ') + str;
+const addArticle = str => (/[aeiou]/.test(str[0]) ? 'an ' : 'a ') + str;
 const requiredFieldError = field => `Villagers are required to have ${addArticle(field[0])} field`;
 
 const villagerSchema = new mongoose.Schema({

@@ -1,4 +1,9 @@
+/* globals require process module */
+
+// eslint-disable-next-line
 const router = require('express').Router();
+
+const { createVillager } = require('./villagerController');
 
 // main (root) route
 router.get('/', (req,res) => {
@@ -10,9 +15,17 @@ router.get('/', (req,res) => {
 router.get('/apps', (req,res) => {
   res.render('apps');
 });
-router.get('/apps/:appName', (req,res) => {
-  res.render(`apps/${req.params.appName}`);
+router.get('/apps/:appName', (req,res,next) => {
+  if (/-admin$/.test(req.params.appName)) return next();
+
+  const file = ('admin' in req.query)
+    ? `apps/${req.params.appName}-admin`
+    : `apps/${req.params.appName}`;
+  res.render(file);
 });
+
+// /stardew routes
+router.post('/stardew/villager', createVillager);
 
 // /code routes
 router.get('/code', (req,res) => {
