@@ -9,20 +9,22 @@ prepend head
 block content
   h1 Stardew Valley API Admin
 
-  .villagers
+  .villager-admin
     h2 Villagers
-    .villager-list
-      each villager in villagers
-        .villager
-          span= villager.name
-          button(data-id=villager._id) Edit
-          button(data-id=villager._id) Delete
-    //- .forms
-      //- form.add-villager
-      //-   input(type="text" name="name" placeholder="Name")
-      //-   input(type="text" name="birthday" placeholder="Birthday")
-      //-   input(type="text" name="region" placeholder="Region")
-      //-   input(type="text" name="address" placeholder="Address")
-      //-   input(type="submit" value="Create Villager")
-      
-      //- .villager-list
+    .villagers-wrapper
+      .villager-list
+        button.e-btn.e-btn--cta.create-villager Add Villager
+        each villager in villagers
+          .villager(data-villager=villager)
+            span= villager.name
+            button.e-btn.edit-btn Edit
+            button.e-btn.del-btn Delete
+      form.edit-villager.invis
+        input(type="text" name="name" placeholder="Name")
+        input(type="text" name="birthday" placeholder="Birthday")
+        input(type="text" name="region" placeholder="Region")
+        input(type="text" name="address" placeholder="Address")
+        .controls
+          input.e-btn.e-btn--cta.create-villager(type="submit" value="Create Villager")
+          input.e-btn.e-btn--cta.update-villager.hide(type="submit" value="Save Changes")
+          button.e-btn.cancel-edit(type="button") Cancel
