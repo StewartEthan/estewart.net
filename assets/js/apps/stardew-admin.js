@@ -15,8 +15,8 @@
   let currentVillager = null;
 
   // Event listeners
-  addVillagerBtn.addEventListener('click', handleAddVillager);
-  cancelChangesBtn.addEventListener('click', handleCancelChanges);
+  // addVillagerBtn.addEventListener('click', handleAddVillager);
+  // cancelChangesBtn.addEventListener('click', handleCancelChanges);
   villagerDelBtns.forEach(btn => btn.addEventListener('click', handleDeleteVillager));
   villagerEditBtns.forEach(btn => btn.addEventListener('click', handleEditVillager));
   villagerForm.addEventListener('submit', handleSubmitVillager);

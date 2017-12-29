@@ -6,7 +6,7 @@ const Villager = mongoose.model('Villager');
 exports.createVillager = async (req,res) => {
   const villager = new Villager(req.body);
   await villager.save();
-  res.sendStatus(201);
+  res.status(201).json(villager);
 };
 
 exports.getAllVillagers = async (req,res) => {
@@ -33,6 +33,8 @@ exports.updateVillager = async (req,res) => {
   const { id } = req.params;
   const newData = { $set: req.body };
   const updated = await Villager.findByIdAndUpdate(id, newData, { new: true });
+  console.log('req.body', req.body);
+  console.log('updated', updated);
   res.json(updated);
 };
 
