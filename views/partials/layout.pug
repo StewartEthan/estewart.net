@@ -3,7 +3,8 @@
   const assets = {
     css: [],
     html: [],
-    js: []
+    js: [],
+    components: []
   };
 
 doctype html
@@ -21,6 +22,9 @@ html
       include ./footer.pug
     //- To be used for scripts not essential to TTI, for performance sake
     block scripts
+      if assets.components.length
+        each script in assets.components
+          script(src=`/components/${script}.js`)
       if assets.js.length
         each script in assets.js
           script(src=`/js/${script}.js`)
