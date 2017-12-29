@@ -5,33 +5,41 @@ prepend head
     page.title = 'Stardew Valley Data Admin'
     assets.css.push('apps/stardew-admin')
     assets.js.push('apps/stardew-admin')
+    assets.components.push('StardewAdmin')
 
 block content
   h1 Stardew Valley API Admin
+  #app
+  script.
+    document.addEventListener('stardew-admin-mounted', e => {
+      const detail = !{JSON.stringify(villagers)}
+      document.dispatchEvent(new CustomEvent('stardew-villager-data', { detail }));
+    });
 
-  .villager-admin
-    h2 Villagers
-    .villagers-wrapper
-      .villager-list
-        button.e-btn.e-btn--cta.create-villager Add Villager
-        each villager in villagers
-          .villager(data-villager=villager)
-            span= villager.name
-            button.e-btn.edit-btn Edit
-            button.e-btn.del-btn Delete
+//- Markup for use without Preact is below. Keeping for now for reference as needed
+  //- .villager-admin
+  //-   h2 Villagers
+  //-   .villagers-wrapper
+  //-     .villager-list
+  //-       button.e-btn.e-btn--cta.create-villager Add Villager
+  //-       each villager in villagers
+  //-         .villager(data-villager=villager)
+  //-           span= villager.name
+  //-           button.e-btn.edit-btn Edit
+  //-           button.e-btn.del-btn Delete
             
-      form.edit-villager.invis
-        input(type="text" name="name" placeholder="Name")
-        input(type="text" name="birthday" placeholder="Birthday")
-        input(type="text" name="region" placeholder="Region")
-        //- select
-        //-   each region in ['Beach','Calico Desert','Cindersap Forest','Mines','Mountain','Pelican Town','Sewers','Witch\'s Swamp']
-        //-     option(value=region)= region
-        input(type="text" name="address" placeholder="Address")
-        .marriage.e-card.e-card--small
-          input(type="checkbox" name="single" id="single")
-          label(for="single") Single and ready to mingle
-        .controls
-          input.e-btn.e-btn--cta.create-villager(type="submit" value="Create Villager")
-          input.e-btn.e-btn--cta.update-villager.hide(type="submit" value="Save Changes")
-          button.e-btn.cancel-changes(type="button") Cancel
+  //-     form.edit-villager.invis
+  //-       input(type="text" name="name" placeholder="Name")
+  //-       input(type="text" name="birthday" placeholder="Birthday")
+  //-       input(type="text" name="region" placeholder="Region")
+  //-       //- select
+  //-       //-   each region in ['Beach','Calico Desert','Cindersap Forest','Mines','Mountain','Pelican Town','Sewers','Witch\'s Swamp']
+  //-       //-     option(value=region)= region
+  //-       input(type="text" name="address" placeholder="Address")
+  //-       .marriage.e-card.e-card--small
+  //-         input(type="checkbox" name="single" id="single")
+  //-         label(for="single") Single and ready to mingle
+  //-       .controls
+  //-         input.e-btn.e-btn--cta.create-villager(type="submit" value="Create Villager")
+  //-         input.e-btn.e-btn--cta.update-villager.hide(type="submit" value="Save Changes")
+  //-         button.e-btn.cancel-changes(type="button") Cancel
