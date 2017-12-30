@@ -49,14 +49,25 @@ export class VillagerForm extends Component {
     } = currentVillager || {};
     const handleSubmitVillager = this.handleSubmitVillager.bind(this);
     const { hideForm } = this;
+    // const inputFields = ['name','birthday','region','address'];
 
     return (
       <form class={ formClass } onSubmit={ handleSubmitVillager }>
+        {/* { inputFields.map(field => {
+          return (
+            <input
+              type="text"
+              name={ field }
+              placeholder={ field.replace(/^./, field[0].toUpperCase()) }
+              value={ (currentVillager || {})[field] || '' }
+            />
+          );
+        }) } */}
         <input type="text" name="name" placeholder="Name" value={ name } />
         <input type="text" name="birthday" placeholder="Birthday" value={ birthday } />
         <input type="text" name="region" placeholder="Region" value={ region } />
         <input type="text" name="address" placeholder="Address" value={ address } />
-        <div class="marriage e-card e-card--small">
+        <div class="marriage">
           <input type="checkbox" name="single" id="single" checked={ single } />
           <label for="single">Single and ready to mingle</label>
         </div>
