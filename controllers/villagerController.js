@@ -33,8 +33,6 @@ exports.updateVillager = async (req,res) => {
   const { id } = req.params;
   const newData = { $set: req.body };
   const updated = await Villager.findByIdAndUpdate(id, newData, { new: true });
-  console.log('req.body', req.body);
-  console.log('updated', updated);
   res.json(updated);
 };
 
