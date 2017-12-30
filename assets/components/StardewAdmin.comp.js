@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 import { h, render, Component } from 'preact';
+import { VillagerForm } from './VillagerForm.comp.js';
 // import linkState from 'linkstate';
 
 function createVillagerDiv(villager) {
@@ -19,6 +20,7 @@ class StardewAdmin extends Component {
   componentWillMount() {
     this.setState({
       currentVillager: null,
+      isNewVillager: true,
       shouldShowForm: false,
       villagers: []
     });
@@ -26,17 +28,26 @@ class StardewAdmin extends Component {
 
   componentDidMount() {
     document.addEventListener('stardew-villager-data', ({ detail }) => this.setState({ villagers: detail }));
+    document.addEventListener('hide-villager-form', e => this.setState({ shouldShowForm: false }));
+    document.addEventListener('villager-form-submitted', ({ detail }) => {
+      const { newVillager } = detail;
+      const { currentVillager } = this.state;
+      const villagers = currentVillager
+        ? this.state.villagers.map(villager => this.replaceVillager(villager, newVillager))
+        : [ ...this.state.villagers, newVillager ].sort(this.sortVillagers);
+      this.setState({ currentVillager: null, villagers });
+    });
     document.dispatchEvent(new CustomEvent('stardew-admin-mounted'));
   }
 
   handleAddVillager() {
     this.showForm();
-    this.setState({ currentVillager: null });
+    this.setState({ currentVillager: null, isNewVillager: true });
   }
 
   handleEditVillager(currentVillager) {
     this.showForm();
-    this.setState({ currentVillager });
+    this.setState({ currentVillager, isNewVillager: false });
   }
 
   handleSubmitVillager(evt) {
@@ -68,10 +79,6 @@ class StardewAdmin extends Component {
       });
   }
 
-  hideForm() {
-    this.setState({ shouldShowForm: false });
-  }
-
   replaceVillager(oldVillager, newVillager) {
     return oldVillager._id === newVillager._id ? newVillager : oldVillager;
   }
@@ -84,18 +91,13 @@ class StardewAdmin extends Component {
     return a.name > b.name;
   }
 
-  render(props, { villagers, shouldShowForm, currentVillager }) {
+  render(props, { villagers, shouldShowForm, currentVillager, isNewVillager }) {
     const handleAddVillager = this.handleAddVillager.bind(this);
     const handleSubmitVillager = this.handleSubmitVillager.bind(this);
-    const hideForm = this.hideForm.bind(this);
     const formClass = `edit-villager ${ shouldShowForm ? '' : 'invis' }`;
-    const {
-      name = '',
-      birthday = '',
-      region = '',
-      address = '',
-      single = false
-    } = currentVillager || {};
+
+    console.log('VillagerForm', VillagerForm);
+
     return (
       <div class="villager-admin">
         <h2>Villagers</h2>
@@ -104,21 +106,11 @@ class StardewAdmin extends Component {
             <button class="e-btn e-btn--cta create-villager" onClick={ handleAddVillager }>Add Villager</button>
             { villagers.map(createVillagerDiv.bind(this)) }
           </div>
-          <form class={ formClass } onSubmit={ handleSubmitVillager }>
-            <input type="text" name="name" placeholder="Name" value={ name } />
-            <input type="text" name="birthday" placeholder="Birthday" value={ birthday } />
-            <input type="text" name="region" placeholder="Region" value={ region } />
-            <input type="text" name="address" placeholder="Address" value={ address } />
-            <div class="marriage e-card e-card--small">
-              <input type="checkbox" name="single" id="single" checked={ single } />
-              <label for="single">Single and ready to mingle</label>
-            </div>
-            <div class="controls">
-              <input type="submit" class="e-btn e-btn--cta create-villager" value="Create Villager" />
-              <input type="submit" class="e-btn e-btn--cta update-villager hide" value="Save Changes" />
-              <button type="button" class="e-btn cancel-changes" onClick={ hideForm }>Cancel</button>
-            </div>
-          </form>
+          <VillagerForm
+            currentVillager={ currentVillager }
+            formClass={ formClass }
+            isNewVillager={ isNewVillager }
+          ></VillagerForm>
         </div>
       </div>
     );
