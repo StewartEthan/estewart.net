@@ -53,7 +53,9 @@ app.use(session({
 
 // Connect to Stardew Valley database
 // TODO: Look into making this connection in the API controller?
-mongoose.connect(process.env.STARDEW_DATABASE, { useMongoClient: true });
+const mongoUrl = process.env.STARDEW_DATABASE;
+console.log('STARDEW_DATABASE', mongoUrl);
+mongoose.connect(mongoUrl, { useMongoClient: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
