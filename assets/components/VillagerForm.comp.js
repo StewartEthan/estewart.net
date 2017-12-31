@@ -1,6 +1,18 @@
 import { h, Component } from 'preact';
 
+function titleCase(str) {
+  return str
+    .split(/\s+/)
+    .map(word => word.replace(/^./, word[0].toUpperCase()))
+    .join(' '); 
+}
+
 export class VillagerForm extends Component {
+  getCurrentValue(field) {
+    const current = this.props.currentVillager || {};
+    return current[field] || '';
+  }
+
   handleSubmitVillager(evt) {
     const { currentVillager } = this.props;
     evt.preventDefault();
@@ -38,34 +50,24 @@ export class VillagerForm extends Component {
       isNewVillager = true,
       isVisible = false
     } = props;
-    const {
-      name = '',
-      birthday = '',
-      region = '',
-      address = '',
-      single = false
-    } = currentVillager || {};
     const handleSubmitVillager = this.handleSubmitVillager.bind(this);
     const { hideForm } = this;
     const formClass = `edit-villager ${isVisible ? '' : 'invis'}`;
-    // const inputFields = ['name','birthday','region','address'];
+    const inputFields = [ 'name','birthday','region','address' ];
+    const { single = false } = currentVillager || {};
 
     return (
       <form class={ formClass } onSubmit={ handleSubmitVillager }>
-        {/* { inputFields.map(field => {
+        { inputFields.map(field => {
           return (
             <input
               type="text"
               name={ field }
-              placeholder={ field.replace(/^./, field[0].toUpperCase()) }
-              value={ (currentVillager || {})[field] || '' }
+              placeholder={ titleCase(field) }
+              value={ this.getCurrentValue(field) }
             />
           );
-        }) } */}
-        <input type="text" name="name" placeholder="Name" value={ name } />
-        <input type="text" name="birthday" placeholder="Birthday" value={ birthday } />
-        <input type="text" name="region" placeholder="Region" value={ region } />
-        <input type="text" name="address" placeholder="Address" value={ address } />
+        }) }
         <div class="marriage">
           <input type="checkbox" name="single" id="single" checked={ single } />
           <label for="single">Single and ready to mingle</label>

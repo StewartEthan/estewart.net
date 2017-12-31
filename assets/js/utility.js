@@ -8,7 +8,7 @@
  * @param  {Number} max maximum number to return
  * @return {Number}     random number within the range provided
  */
-function random(min, max) {
+function random(min = 0, max = 1) {
   return min + Math.floor(Math.random() * (max - min));
 }
 
@@ -25,48 +25,15 @@ function scrollToTop() {
   }
 }
 
-const httpMethods = [
-  'GET',
-  'HEAD',
-  'POST',
-  'PUT',
-  'DELETE',
-  'CONNECT',
-  'OPTIONS'
-];
-const hdr = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-};
-function xhr(method, url, headers, data, cb) {
-  // Handle potential errors with params
-  if (httpMethods.indexOf(method) === -1) {
-    throw new Error('You must use a valid HTTP method');
-  }
-  if (typeof url !== "string" || url === '') {
-    throw new Error('url argument must not be empty');
-  }
-  if (headers === undefined) headers = null;
-  if (data === undefined) data = null;
-
-  const xhreq = new XMLHttpRequest();
-
-  xhreq.open(method, url, true);
-
-  xhreq.onreadystatechange = e => {
-    if (xhreq.readyState === XMLHttpRequest.DONE) {
-      // Only use cb if its a function, allowing for it to be optional
-      if (typeof cb === 'function') {
-        cb(xhreq);
-      }
-    }
-  }
-
-  // Set each header
-  for (let key in headers) {
-    xhreq.setRequestHeader(key, headers[key]);
-  }
-
-  // Send the data
-  xhreq.send(data);
+/**
+ * Returns the string passed as a param with the first letter of
+ * each word in the string capitalized
+ * @param  {String} str String to be converted to title case
+ * @return {String}     String in title case
+ */
+function titleCase(str) {
+  return str
+    .split(/\s+/)
+    .map(word => word.replace(/^./, word[0].toUpperCase()))
+    .join(' ');
 }
