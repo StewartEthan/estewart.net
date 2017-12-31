@@ -3,6 +3,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h, render, Component } from 'preact';
 import { VillagerForm } from './VillagerForm.comp.js';
+import { VillagerList } from './VillagerList.comp.js';
 // import linkState from 'linkstate';
 
 function createVillagerDiv(villager) {
@@ -37,6 +38,8 @@ class StardewAdmin extends Component {
         : [ ...this.state.villagers, newVillager ].sort(this.sortVillagers);
       this.setState({ currentVillager: null, villagers });
     });
+    document.addEventListener('villager-add', this.handleAddVillager.bind(this));
+    document.addEventListener('villager-edit', ({ detail }) => this.handleEditVillager(detail.villager));
     document.dispatchEvent(new CustomEvent('stardew-admin-mounted'));
   }
 
@@ -48,35 +51,6 @@ class StardewAdmin extends Component {
   handleEditVillager(currentVillager) {
     this.showForm();
     this.setState({ currentVillager, isNewVillager: false });
-  }
-
-  handleSubmitVillager(evt) {
-    const { currentVillager } = this.state;
-    evt.preventDefault();
-    const {
-      name: { value: name },
-      birthday: { value: birthday },
-      region: { value: region },
-      address: { value: address },
-      single: { checked: single }
-    } = evt.target;
-    const data = { name, birthday, region, address, single };
-    if (currentVillager) data._id = currentVillager._id;
-    const url = currentVillager
-      ? `/stardew/villager/${currentVillager._id}`
-      : '/stardew/villager';
-    const method = currentVillager ? 'PUT' : 'POST';
-    const body = JSON.stringify(data);
-    const headers = { 'Content-Type': 'application/json' };
-  
-    fetch(url, { method, body, headers })
-      .then(res => res.json())
-      .then(newVillager => {
-        const villagers = currentVillager
-          ? this.state.villagers.map(villager => this.replaceVillager(villager, newVillager))
-          : [ ...this.state.villagers, newVillager ].sort(this.sortVillagers);
-        this.setState({ villagers, currentVillager: null });
-      });
   }
 
   replaceVillager(oldVillager, newVillager) {
@@ -92,20 +66,13 @@ class StardewAdmin extends Component {
   }
 
   render(props, { villagers, shouldShowForm, currentVillager, isNewVillager }) {
-    const handleAddVillager = this.handleAddVillager.bind(this);
-    const handleSubmitVillager = this.handleSubmitVillager.bind(this);
     const formClass = `edit-villager ${ shouldShowForm ? '' : 'invis' }`;
-
-    console.log('VillagerForm', VillagerForm);
 
     return (
       <div class="villager-admin">
         <h2>Villagers</h2>
         <div class="villagers-wrapper">
-          <div class="villager-list">
-            <button class="e-btn e-btn--cta create-villager" onClick={ handleAddVillager }>Add Villager</button>
-            { villagers.map(createVillagerDiv.bind(this)) }
-          </div>
+          <VillagerList villagers={ villagers }></VillagerList>
           <VillagerForm
             currentVillager={ currentVillager }
             formClass={ formClass }

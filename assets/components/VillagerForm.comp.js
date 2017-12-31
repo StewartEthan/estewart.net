@@ -1,5 +1,3 @@
-/* globals CustomEvent */
-
 import { h, Component } from 'preact';
 
 export class VillagerForm extends Component {
