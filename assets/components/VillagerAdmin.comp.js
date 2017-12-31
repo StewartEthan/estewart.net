@@ -13,19 +13,7 @@ export class VillagerAdmin extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('villager-data-loaded', ({ detail }) => this.setState({ villagers: detail }));
-    document.addEventListener('villager-form-hide', e => this.setState({ isVisible: false }));
-    document.addEventListener('villager-form-submitted', ({ detail }) => {
-      const { newVillager } = detail;
-      const { currentVillager } = this.state;
-      const villagers = currentVillager
-        ? this.state.villagers.map(villager => this.replaceVillager(villager, newVillager))
-        : [ ...this.state.villagers, newVillager ].sort(this.sortVillagers);
-      this.setState({ currentVillager: null, villagers });
-    });
-    document.addEventListener('villager-add', this.handleAddVillager.bind(this));
-    document.addEventListener('villager-delete', ({ detail: villager }) => this.handleDeleteVillager(villager));
-    document.addEventListener('villager-edit', ({ detail: villager }) => this.handleEditVillager(villager));
+    this.setEventListeners();
     document.dispatchEvent(new CustomEvent('stardew-admin-mounted'));
   }
 
@@ -50,6 +38,22 @@ export class VillagerAdmin extends Component {
 
   replaceVillager(oldVillager, newVillager) {
     return oldVillager._id === newVillager._id ? newVillager : oldVillager;
+  }
+
+  setEventListeners() {
+    document.addEventListener('villager-data-loaded', ({ detail }) => this.setState({ villagers: detail }));
+    document.addEventListener('villager-form-hide', e => this.setState({ isVisible: false }));
+    document.addEventListener('villager-form-submitted', ({ detail }) => {
+      const { newVillager } = detail;
+      const { currentVillager } = this.state;
+      const villagers = currentVillager
+        ? this.state.villagers.map(villager => this.replaceVillager(villager, newVillager))
+        : [ ...this.state.villagers, newVillager ].sort(this.sortVillagers);
+      this.setState({ currentVillager: null, villagers });
+    });
+    document.addEventListener('villager-add', this.handleAddVillager.bind(this));
+    document.addEventListener('villager-delete', ({ detail: villager }) => this.handleDeleteVillager(villager));
+    document.addEventListener('villager-edit', ({ detail: villager }) => this.handleEditVillager(villager));
   }
 
   showForm() {
