@@ -35,8 +35,8 @@ export class VillagerForm extends Component {
   render(props, state) {
     const {
       currentVillager = null,
-      formClass = '',
-      isNewVillager = true
+      isNewVillager = true,
+      isVisible = false
     } = props;
     const {
       name = '',
@@ -47,6 +47,7 @@ export class VillagerForm extends Component {
     } = currentVillager || {};
     const handleSubmitVillager = this.handleSubmitVillager.bind(this);
     const { hideForm } = this;
+    const formClass = `edit-villager ${isVisible ? 'invis' : ''}`;
     // const inputFields = ['name','birthday','region','address'];
 
     return (

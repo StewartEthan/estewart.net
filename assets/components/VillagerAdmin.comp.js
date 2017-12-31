@@ -50,9 +50,7 @@ export class VillagerAdmin extends Component {
     return a.name > b.name;
   }
 
-  render(props, { villagers, shouldShowForm, currentVillager, isNewVillager }) {
-    const formClass = `edit-villager ${ shouldShowForm ? '' : 'invis' }`;
-
+  render(props, { villagers, isVisible, currentVillager, isNewVillager }) {
     return (
       <div class="villager-admin">
         <h2>Villagers</h2>
@@ -62,6 +60,7 @@ export class VillagerAdmin extends Component {
             currentVillager={ currentVillager }
             formClass={ formClass }
             isNewVillager={ isNewVillager }
+            isVisible={ isVisible }
           ></VillagerForm>
         </div>
       </div>
