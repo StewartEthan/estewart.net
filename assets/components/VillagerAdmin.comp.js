@@ -7,14 +7,14 @@ export class VillagerAdmin extends Component {
     this.setState({
       currentVillager: null,
       isNewVillager: true,
-      shouldShowForm: false,
+      isVisible: false,
       villagers: []
     });
   }
 
   componentDidMount() {
-    document.addEventListener('stardew-villager-data', ({ detail }) => this.setState({ villagers: detail }));
-    document.addEventListener('villager-form-hide', e => this.setState({ shouldShowForm: false }));
+    document.addEventListener('villager-data-loaded', ({ detail }) => this.setState({ villagers: detail }));
+    document.addEventListener('villager-form-hide', e => this.setState({ isVisible: false }));
     document.addEventListener('villager-form-submitted', ({ detail }) => {
       const { newVillager } = detail;
       const { currentVillager } = this.state;
@@ -24,6 +24,7 @@ export class VillagerAdmin extends Component {
       this.setState({ currentVillager: null, villagers });
     });
     document.addEventListener('villager-add', this.handleAddVillager.bind(this));
+    document.addEventListener('villager-delete', ({ detail: villager }) => this.handleDeleteVillager(villager));
     document.addEventListener('villager-edit', ({ detail: villager }) => this.handleEditVillager(villager));
     document.dispatchEvent(new CustomEvent('stardew-admin-mounted'));
   }
@@ -31,6 +32,15 @@ export class VillagerAdmin extends Component {
   handleAddVillager() {
     this.showForm();
     this.setState({ currentVillager: null, isNewVillager: true });
+  }
+
+  handleDeleteVillager(villager) {
+    const { _id: id } = villager;
+    fetch(`/stardew/villager/${id}`, { method: 'DELETE' })
+      .then(() => {
+        const villagers = this.state.villagers.filter(v => v._id !== id);
+        this.setState({ currentVillager: null, villagers });
+      });
   }
 
   handleEditVillager(currentVillager) {
@@ -43,7 +53,7 @@ export class VillagerAdmin extends Component {
   }
 
   showForm() {
-    this.setState({ shouldShowForm: true });
+    this.setState({ isVisible: true });
   }
 
   sortVillagers(a, b) {
@@ -58,7 +68,6 @@ export class VillagerAdmin extends Component {
           <VillagerList villagers={ villagers }></VillagerList>
           <VillagerForm
             currentVillager={ currentVillager }
-            formClass={ formClass }
             isNewVillager={ isNewVillager }
             isVisible={ isVisible }
           ></VillagerForm>

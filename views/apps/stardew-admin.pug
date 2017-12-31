@@ -13,7 +13,7 @@ block content
   script.
     document.addEventListener('stardew-admin-mounted', e => {
       const detail = !{JSON.stringify(villagers)}
-      document.dispatchEvent(new CustomEvent('stardew-villager-data', { detail }));
+      document.dispatchEvent(new CustomEvent('villager-data-loaded', { detail }));
     });
 
 //- Markup for use without Preact is below. Keeping for now for reference as needed
