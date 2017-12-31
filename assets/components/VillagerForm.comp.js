@@ -29,7 +29,7 @@ export class VillagerForm extends Component {
   }
   
   hideForm() {
-    document.dispatchEvent(new CustomEvent('hide-villager-form'));
+    document.dispatchEvent(new CustomEvent('villager-form-hide'));
   }
 
   render(props, state) {

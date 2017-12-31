@@ -31,10 +31,13 @@ form.edit-villager
     display grid
     flex-grow 1
     grid-column-gap 10px
-    grid-template-columns 2fr 1fr 1fr
+    grid-template-columns repeat(4, 1fr)
 
     span
       line-height 2em
+    
+    .single
+      text-align center
 
 .villagers-wrapper
   align-items flex-start
