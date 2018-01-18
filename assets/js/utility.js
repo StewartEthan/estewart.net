@@ -1,6 +1,26 @@
+/* eslint-disable no-unused-vars */
+/* global clearTimeout setTimeout scrollBy */
 /**
  * A file containing small utility functions for use across the site
  */
+
+
+/**
+ * Ensures a function is only called after `time` milliseconds after the last invocation
+ * @param {Function} fn   the function to be debounced
+ * @param {Number}   time the amount of time in milliseconds to wait after invoking the debounced function before invoking `fn`
+ */
+function debounce(fn, time) {
+  let interval;
+  return (...args) => {
+    clearTimeout(interval);
+    interval = setTimeout(() => {
+      console.log('calling debounced fn');
+      interval = null;
+      fn(...args);
+    }, time);
+  };
+}
 
 /**
  * Returns a random integer within a range
