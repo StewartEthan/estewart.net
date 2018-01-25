@@ -1,16 +1,18 @@
+/* globals fetch CustomEvent */
+
 import { h, Component } from 'preact';
 
 function titleCase(str) {
   return str
     .split(/\s+/)
     .map(word => word.replace(/^./, word[0].toUpperCase()))
-    .join(' '); 
+    .join(' ');
 }
 
 export class VillagerForm extends Component {
   getCurrentValue(field) {
-    const current = this.props.currentVillager || {};
-    return current[field] || '';
+    const { currentVillager = {} } = this.props;
+    return currentVillager[field] || '';
   }
 
   handleSubmitVillager(evt) {

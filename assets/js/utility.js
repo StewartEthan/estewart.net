@@ -15,7 +15,6 @@ function debounce(fn, time) {
   return (...args) => {
     clearTimeout(interval);
     interval = setTimeout(() => {
-      console.log('calling debounced fn');
       interval = null;
       fn(...args);
     }, time);
