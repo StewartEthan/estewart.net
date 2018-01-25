@@ -11,39 +11,32 @@ nav
   +break($small)
     flex-grow 1
 
-  div
-    // border-top 2px solid #D0D0D0
-    // margin auto
-    // max-width 500px
-    // padding 15px 15px 0
-    // width 90%
+  ul
+    display grid
+    grid-template-columns repeat(4, 1fr)
+    margin 0
 
-    ul
-      display grid
-      grid-template-columns repeat(4, 1fr)
-      margin 0
+    li
+      font-family $heading-font
+      letter-spacing 2px
+      padding 10px 0
+      text-align center
 
-      li
-        font-family $heading-font
-        letter-spacing 2px
-        padding 10px 0
-        text-align center
+      a
+        color white
+        cursor pointer
+        text-decoration none
+        text-transform uppercase
+        transition 250ms
 
-        a
+        &:hover,
+        &:focus
+          font-weight 900
+          letter-spacing 5px
+
+        &:focus
+          outline none
+          text-decoration underline
+
+        &:visited
           color white
-          cursor pointer
-          text-decoration none
-          text-transform uppercase
-          transition 250ms
-
-          &:hover,
-          &:focus
-            font-weight 900
-            letter-spacing 5px
-
-          &:focus
-            outline none
-            text-decoration underline
-
-          &:visited
-            color white
