@@ -1,0 +1,56 @@
+extend /views/partials/layout
+
+prepend head
+  -
+    page.title = 'Random Number Generator';
+    assets.css.push('apps/random-number');
+    assets.js.push('apps/random-number');
+
+block content
+  h1 Random Numbers
+  
+  form#generator(method="POST")
+    label(for="range")
+      small How many to generate
+      input(
+        name="range"
+        type="number"
+        value="1"
+        min="1"
+      )
+      .e-alert.e-alert--warn.range-warning.hide
+        button.e-alert__close-btn(type="button")
+        span.
+          The range you provided is greater than the number of integers
+          between <span class="min">1</span> and <span class="max">10</span>.
+          The results will be calculated with a range of <span class="max-range">10</span>.
+          In order to allow more results, you must either increase your range, change
+          your minimum or maximum allowed value, or allow duplicates.
+    label(for="min")
+      small Smallest number allowed
+      input(
+        name="min"
+        type="number"
+        value="1"
+        min="0"
+      )
+    label(for="max")
+      small Largest number allowed
+      input(
+        name="max"
+        type="number"
+        value="10"
+        min="1"
+      )
+    label(for="dupeToggle")
+      input(
+        id="dupeToggle"
+        type="checkbox"
+      )
+      span Duplicates allowed
+    button.e-btn.e-btn--cta.e-btn--large(type="submit") Generate Numbers
+
+  .output-wrapper
+    small Results
+    output.e-card.hide
+    .e-card Use the form above to choose how to generate your random numbers
