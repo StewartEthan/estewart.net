@@ -22,6 +22,24 @@ function debounce(fn, time) {
 }
 
 /**
+ * Determines whether a number is even
+ * @param  {Number} num The number to check for being even
+ * @return {Boolean}    Whether the number is even
+ */
+function isEven(num) {
+  return num % 2 === 0;
+}
+
+/**
+ * Determines whether a number is odd
+ * @param  {Number} num The number to check for being odd
+ * @return {Boolean}    Whether the number is odd
+ */
+function isOdd(num) {
+  return num % 2 !== 0;
+}
+
+/**
  * Returns a random integer within a range
  * @param  {Number} min minimum random number to return
  * @param  {Number} max maximum number to return
@@ -29,6 +47,21 @@ function debounce(fn, time) {
  */
 function random(min = 0, max = 1) {
   return min + Math.floor(Math.random() * (max - min));
+}
+
+/**
+ * Generates a range of all numbers from `first` to `last` inclusive
+ * @param  {Number} first Number at which the range starts
+ * @param  {Number} last  Number at which the range ends
+ * @return {Array}        Range of all numbers in the range specified
+ */
+function range(first, last) {
+  function* rangeHelper(start, end) {
+    let i = start;
+    while (i <= end) yield i++;
+  }
+
+  return [ ...rangeHelper(first, last) ];
 }
 
 /**
