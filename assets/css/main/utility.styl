@@ -11,12 +11,22 @@ h1
 input
   border 1px solid #ccc
   border-radius 6px
+  box-sizing border-box
   font-size 1em
   padding 7px
 
 input[type="checkbox"] + label
   cursor pointer
   margin-left 5px
+
+label
+  cursor pointer
+
+small
+  font-weight bold
+
+  &.normal
+    font-weight normal
 
 ul, ol
   &.no-pad
@@ -47,10 +57,36 @@ ul, ol
     max-width 40vw
 
 .e // Doing it like this so if I ever change my prefix, I only have to change it once
+  $border-radius = 6px
+
+  &-alert
+    background-color $alert-bkgd-color
+    border 3px solid $alert-bdr-color
+    border-radius $border-radius
+    cursor default
+    padding 10px 15px
+    position relative
+
+    &--warn
+      background-color $warn-alert-bkgd-color
+      border-color $warn-alert-bdr-color
+
+    & button&__close-btn
+      background transparent
+      border none
+      cursor pointer
+      padding 0 5px 0 0
+      position absolute
+      right 0
+      top 0
+
+      &:before
+        content '✘'
+        font-size 1.25rem
   &-btn
     background $btn-bkgd-color
     border 1px solid $btn-bdr-color
-    border-radius 6px
+    border-radius $border-radius
     cursor pointer
     font-size calc(1em - 0.25px)
     letter-spacing 0.25px
@@ -64,13 +100,17 @@ ul, ol
       color white
       font-size 1em
       text-shadow 1px 1px 1px #333
+    
+    &--large
+      font-size 1.25rem
+      padding 0.75rem 0.5rem
 
     &:hover
       filter brightness(90%)
   
   &-card
     --shadow-offset 1px
-    border-radius 6px
+    border-radius $border-radius
     box-shadow var(--shadow-offset) var(--shadow-offset) 4px 1px $gray-accent + 25%
     padding 15px
 
