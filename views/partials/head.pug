@@ -52,4 +52,10 @@ link(
 unless page.noUtilities
   script(src="/js/utility.js")
 
+//- For critical scripts
+//- TODO: Eventually make it so type="module" can be added intelligently
+if assets.critical.length
+  each script in assets.critical
+    script(src=`/js/${script}.js`)
+
 //- Polyfill loader may be added, or idea may be abandoned in favor of Babel

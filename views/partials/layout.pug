@@ -4,7 +4,9 @@
     css: [],
     html: [],
     js: [],
-    components: []
+    components: [],
+    critical: [],
+    modules: []
   };
 
 doctype html
@@ -28,3 +30,10 @@ html
       if assets.js.length
         each script in assets.js
           script(src=`/js/${script}.js`)
+      if assets.modules.length
+        each script in assets.modules
+          - console.log(script);
+          script(
+            src=`/js/${script}.js`
+            type="module"
+          )
