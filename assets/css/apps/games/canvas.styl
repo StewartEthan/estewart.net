@@ -23,3 +23,13 @@ main[role=main] > .content
 
 footer[role=contentinfo]
   display none
+
+.game-loading-spinner
+  // TODO: Make spinner size a custom property and use here
+  --spinner-margin calc(120px / -2)
+
+  left 50%
+  margin-left var(--spinner-margin)
+  margin-top var(--spinner-margin)
+  position absolute
+  top 50%

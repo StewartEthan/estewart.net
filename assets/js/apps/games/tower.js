@@ -1,2 +1,3 @@
-import { name } from './common/dummy.js';
-console.log(name);
+setTimeout(() => {
+  document.dispatchEvent(new CustomEvent('es-game-loaded'));
+}, 2000);

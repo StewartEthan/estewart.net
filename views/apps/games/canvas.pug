@@ -8,4 +8,5 @@ prepend head
     assets.modules.push(`apps/games/${gameName}`)
 
 block content
-  canvas#game-el
+  .spinner.game-loading-spinner
+  canvas#game-el.hide
