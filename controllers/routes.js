@@ -15,6 +15,11 @@ router.get('/', (req,res) => {
 router.get('/apps', (req,res) => {
   res.render('apps');
 });
+router.get('/apps/games/:gameName', (req,res) => {
+  const { gameName } = req.params;
+  const gameTitle = gameName.replace(gameName[0], gameName[0].toUpperCase());
+  res.render(`apps/games/canvas`, { gameName, gameTitle });
+});
 router.get('/apps/:appName', async (req,res,next) => {
   if (/-admin$/.test(req.params.appName)) next(); // Skip any attempts to go directly to admin pages
 

@@ -1,0 +1,11 @@
+extend /views/partials/layout
+
+prepend head
+  -
+    page.title = `${gameTitle} Game`
+    assets.css.push('apps/games/canvas')
+    assets.modules.push('apps/games/common');
+    assets.modules.push(`apps/games/${gameName}`)
+
+block content
+  canvas#game-el

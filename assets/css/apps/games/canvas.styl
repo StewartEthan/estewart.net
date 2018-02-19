@@ -1,0 +1,25 @@
+#game-el
+  border 3px solid red
+  display block
+  margin auto
+
+// TODO: Make page options to handle these overrides
+body
+  max-height 100vh
+  max-width 100vw
+
+  & > .wrapper
+    min-width 100vw
+
+header[role=banner]
+  grid-row-gap 0
+  padding 0
+
+  #logo
+    display none
+
+main[role=main] > .content
+  width 100%
+
+footer[role=contentinfo]
+  display none
