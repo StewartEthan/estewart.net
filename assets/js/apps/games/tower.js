@@ -1,14 +1,13 @@
-setTimeout(() => {
-  document.dispatchEvent(new CustomEvent('es-game-loaded'));
-}, 2000);
-
 (function() {
-  // const canvas = document.querySelector('#game-el');
-  // const ctx = canvas.getContext('2d');
+  const canvas = document.querySelector('#game-el');
+  const ctx = canvas.getContext('2d');
 
-  // function main(time) {
-  //   requestAnimationFrame(main);
-  // }
+  function main() {
+    ctx.fillStyle = 'aquamarine';
+    ctx.fillRect(0,0, canvas.width,canvas.height);
+    // requestAnimationFrame(main);
+  }
 
-  // requestAnimationFrame(main);
+  document.dispatchEvent(new CustomEvent('es-game-loaded'));
+  requestAnimationFrame(main);
 }());
