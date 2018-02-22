@@ -1,3 +1,5 @@
+import { fillRect } from '../common/shapes.js';
+
 export class Block {
   constructor(w, h, x, y, dx = 1, dy = 0) {
     this.width = w;
@@ -6,6 +8,12 @@ export class Block {
     this.y = y;
     this.dx = dx;
     this.dy = dy;
+  }
+
+  draw(ctx) {
+    const { x, y, width: w, height: h } = this;
+    const style = 'cadetblue';
+    fillRect(ctx, { x,y, w,h, style });
   }
 
   update() {
