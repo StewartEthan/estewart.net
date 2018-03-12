@@ -1,5 +1,6 @@
 (function(document){
   const form = document.querySelector('form#generator');
+  const inputs = form.querySelectorAll('input[type="number"]');
   const output = document.querySelector('.output-wrapper output');
   const rangeWarning = form.querySelector('.range-warning');
   const rangeWarningCloseBtn = rangeWarning.querySelector('.e-alert__close-btn');
@@ -7,6 +8,7 @@
   let initOutput = document.querySelector('.output-wrapper > div');
 
   form.addEventListener('submit', handleFormSubmit);
+  inputs.forEach(input => input.addEventListener('input', handleInput));
   rangeWarningCloseBtn.addEventListener('click', handleCloseWarning);
 
   function addMarkupToNumber(num, index) {
@@ -69,5 +71,9 @@
     output.innerHTML = numbers
       .map(addMarkupToNumber)
       .join(' ');
+  }
+
+  function handleInput(e) {
+    console.log(e);
   }
 }(document));

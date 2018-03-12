@@ -1,5 +1,4 @@
-@require '../main/vars'
-@require '../main/mixins'
+@require '../main/helpers'
 
 .content
   max-width 350px
@@ -35,7 +34,7 @@ h1
   margin 1.5rem auto
 
   output
-    --column-count 4
+    --column-count 2
     display grid
     font-size 1.5em
     grid-column-gap 10px
@@ -43,5 +42,7 @@ h1
     grid-template-columns repeat(var(--column-count), 1fr)
     justify-items center
 
-    +break($tiny)
-      --column-count 6
+    +break($normal)
+      --column-count 4
+    // +break($large)
+    //   --column-count 6
