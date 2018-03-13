@@ -1,0 +1,16 @@
+extend /views/partials/layout
+
+prepend head
+  -
+    page.title = 'Google Maps API'
+    assets.css.push('apps/google-maps')
+    assets.js.push('apps/google-maps')
+
+block content
+  #map
+
+append scripts
+  script(
+    src=`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMap`
+    async defer
+  )
