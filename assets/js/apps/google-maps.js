@@ -4,6 +4,7 @@ window.gmap = (function() {
   const markers = [];
 
   let map;
+  let marker = null;
 
   window.initMap = () => {
     map = new google.maps.Map(mapEl, {
@@ -25,10 +26,21 @@ window.gmap = (function() {
 
   function hideMarkers() {
     setMaps(null);
+    if (marker) marker.setMap(null);
   }
 
   function setMaps(value) {
     markers.forEach(marker => marker.setMap(value));
+  }
+
+  function setMarker(position) {
+    clearMarkers();
+    if (marker) {
+      marker.setPosition(position);
+      marker.setMap(map);
+    } else {
+      marker = new google.maps.Marker({ position, map });
+    }
   }
 
   function setZoom(zoom) {
@@ -43,6 +55,7 @@ window.gmap = (function() {
     addMarker,
     clearMarkers,
     hideMarkers,
+    setMarker,
     setZoom,
     showMarkers,
   };
