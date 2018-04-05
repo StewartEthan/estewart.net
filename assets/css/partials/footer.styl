@@ -44,13 +44,24 @@ footer
     text-align center
 
     a
+      border-bottom-color var(--color-main-light)
       display inline-block
+      transition filter 125ms ease-in-out
 
+      &:hover,
+      &:focus
+        border-color var(--color-main-light)
+        color var(--color-main-light)
+        filter brightness(50%)
+        
       &:focus
         transform translateY(-2px)
   a
     color var(--color-main-light)
     cursor pointer
+
+    &:visited
+      color var(--color-main-light)
   
   // & > div
   //   display flex
