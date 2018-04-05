@@ -1,6 +1,3 @@
-/**
- * A file containing small utility functions for use across the site
- */
 (function() {
   if ('util' in window) console.error('WARNING: There is now a pre-existing property on `window` called `util`. Change your helper fn object!');
   window.util = {};
@@ -27,28 +24,26 @@
    * @param  {Number} digitCount Optional. The maximum number of hex digits to include. Defaults to 4
    * @return {String}            Hexadecimal string
    */
-  window.util.decToHex = (num, digitCount = 4) => (Number(num) + 0x10000)
-    .toString(16)
-    .substr(digitCount * -1)
-    .toUpperCase();
+  window.util.decToHex = (num, digitCount = 4) => {
+    return (Number(num) + 0x10000)
+      .toString(16)
+      .substr(digitCount * -1)
+      .toUpperCase();
+  };
 
   /**
    * Determines whether a number is even
    * @param  {Number} num The number to check for being even
    * @return {Boolean}    Whether the number is even
    */
-  window.util.isEven = (num) => {
-    return num % 2 === 0;
-  };
+  window.util.isEven = num => num % 2 === 0;
 
   /**
    * Determines whether a number is odd
    * @param  {Number} num The number to check for being odd
    * @return {Boolean}    Whether the number is odd
    */
-  window.util.isOdd = (num) => {
-    return num % 2 !== 0;
-  };
+  window.util.isOdd = num => num % 2 !== 0;
 
   /**
    * Returns a random integer within a range
@@ -56,9 +51,7 @@
    * @param  {Number} max maximum number to return
    * @return {Number}     random number within the range provided
    */
-  window.util.random = (min = 0, max = 1) => {
-    return min + Math.floor(Math.random() * (max - min));
-  };
+  window.util.random = (min = 0, max = 1) => min + Math.floor(Math.random() * (max - min));
 
   function* rangeHelper(start, end) {
     let i = start;
@@ -70,9 +63,7 @@
    * @param  {Number} last  Number at which the range ends
    * @return {Array}        Range of all numbers in the range specified
    */
-  window.util.range = (first, last) => {
-    return [ ...rangeHelper(first, last) ];
-  };
+  window.util.range = (first, last) => [ ...rangeHelper(first, last) ];
 
   /**
    * Provides a smooth scroll to the top of the page
@@ -93,7 +84,7 @@
    * @param  {String} str String to be converted to title case
    * @return {String}     String in title case
    */
-  window.util.titleCase = (str) => {
+  window.util.titleCase = str => {
     return str
       .split(/\s+/)
       .map(word => word.replace(/^./, word[0].toUpperCase()))
