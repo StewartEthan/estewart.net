@@ -1,20 +1,17 @@
 -
   const socials = [
-    { href: 'https://twitter.com/_estewart'       , icon: 'twitter' , title: 'Twitter' , target: '_blank' },
-    { href: 'https://github.com/StewartEthan'     , icon: 'github'  , title: 'GitHub'  , target: '_blank' },
-    { href: 'https://linkedin.com/in/stewartethan', icon: 'linkedin', title: 'LinkedIn', target: '_blank' },
-    { href: 'mailto:eestewart23@gmail.com'        , icon: 'email'   , title: 'Email'   , target: ''       }
+    { href: 'https://twitter.com/_estewart'       , icon: 'twitter' , title: 'Go to my Twitter profile' , target: '_blank' },
+    { href: 'https://github.com/StewartEthan'     , icon: 'github'  , title: 'Go to my GitHub profile'  , target: '_blank' },
+    { href: 'https://linkedin.com/in/stewartethan', icon: 'linkedin', title: 'Go to my LinkedIn profile', target: '_blank' },
   ];
   const selfCopy = `&copy;&nbsp;${new Date().getFullYear()}&nbsp;<a href="/about">Ethan Stewart</a>`;
   const iconCredit = `Icons made by <a href="http://www.flaticon.com/authors/dave-gandy" title="Dave Gandy" target="_blank">Dave Gandy</a> from <a href="http://www.flaticon.com" title="Flaticon" target="_blank">FlatIcon</a>.`;// are licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>`;
 
 footer.print-hide(role="contentinfo")
-  div
-    .copyright!= selfCopy
-    ul.social.no-pad
-      each link in socials
-        li.icon
-          a(href=link.href target=link.target)
-            //- img(src=`/img/icons/${link.icon}.svg` alt=`${link.title} Logo` title=link.title)
-            != util.icon(link.icon)
-    .icon-credit!= iconCredit
+  ul.social.no-pad
+    each link in socials
+      li.icon
+        a(href=link.href target=link.target title=link.title rel='noopener')
+          != util.icon(link.icon)
+  small.normal.credits.
+    &copy;&nbsp;#{new Date().getFullYear()}&nbsp;<a href="/about">Ethan Stewart</a>

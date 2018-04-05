@@ -1,50 +1,91 @@
 footer
-  background-color $primary-blue
-  color white
-  font-family $heading-font
-  padding 15px 30px
+  background-color var(--color-primary)
+  color var(--color-main-light)
+  display grid
+  grid-template-columns 1fr
+  font-family var(--font-heading-family)
+  justify-content center
+  justify-items center
+  padding 0.25rem
 
-  a
-    color white
-    cursor pointer
-
-    &:hover
-      text-decoration underline
-  
-  & > div
+  .social
     display flex
-    flex-direction column
-    margin auto
-    max-width 350px
+    justify-content space-around
+    margin 0.25rem 0
+    max-width 400px
+    width 100%
 
-    & > div
-      text-align center
+    a
+      --border-color transparent
+      
+      svg
+        --icon-fill-color var(--color-main-light)
+        border 1px solid var(--border-color)
+        border-radius 0.25rem
+        transition all 125ms ease-in-out
+        size(3rem)
 
-    .icon-credit
-      font-size 0.65rem
+        g > *
+          fill var(--icon-fill-color)
+          transition fill 125ms ease-in-out
 
-    .social
-      display flex
-      justify-content space-around
-      margin 15px 0
-
-      a
-        --border-color transparent
-        
+      &:focus
+        --border-color var(--color-main-light)
+        outline none
+      
+      &:focus,
+      &:hover
         svg
-          border 1px solid var(--border-color)
-          padding 4px
-          transition 0.15s linear all
-          size(25px)
+          --icon-fill-color var(--color-accent-gray)
+          transform scale(1.25)
 
-        &:focus
-          --border-color white
-          outline none
+  .credits
+    margin-bottom 0.125rem
+    text-align center
+
+    a
+      display inline-block
+
+      &:focus
+        transform translateY(-2px)
+  a
+    color var(--color-main-light)
+    cursor pointer
+  
+  // & > div
+  //   display flex
+  //   flex-direction column
+  //   margin auto
+  //   max-width 350px
+
+  //   & > div
+  //     text-align center
+
+  //   .icon-credit
+  //     font-size 0.65rem
+
+  //   .social
+  //     display flex
+  //     justify-content space-around
+  //     margin 15px 0
+
+  //     a
+  //       --border-color transparent
         
-        &:focus,
-        &:hover
-          svg
-            transform scale(1.25)
+  //       svg
+  //         border 1px solid var(--border-color)
+  //         padding 4px
+  //         transition 0.15s linear all
+  //         size(25px)
 
-            g > *
-              fill $gray-accent
+  //       &:focus
+  //         --border-color white
+  //         outline none
+        
+  //       &:focus,
+  //       &:hover
+  //         svg
+  //           transform scale(1.25)
+
+  //           g > *
+  //             fill $gray-accent

@@ -1,54 +1,6 @@
 header
-  background-color $primary-blue
-  color white
-  display grid
-  font-family "Courier New", Courier, monospace
-  grid-row-gap 10px
-  grid-template-areas "logo" "nav"
-  margin 0px
-  padding 15px 5px
+  background-color var(--color-primary)
+  color var(--color-main-light)
+  margin 0
+  padding 0.5rem 0
   text-shadow 2px 2px 4px black
-
-  +break($small)
-    // align-items center
-    // display flex
-    // min-height 140px
-    align-items center
-    grid-template-areas "logo nav"
-    grid-template-columns auto 1fr
-
-  #logo
-    grid-area logo
-    justify-self center
-    // display flex
-    // justify-content center
-
-    a
-      border 2px solid transparent
-      color white
-      display flex
-      font-size 6em
-      margin auto
-      padding 5px
-      text-decoration none
-
-      &::before
-        content '{'
-      &::after
-        content '}'
-      &::before,
-      &::after
-        transition transform 150ms ease-in-out
-
-      &:hover
-        &::before, &::after
-          transform scale(1.15)
-      &:focus
-        border-color #fff
-        border-radius 5px
-        outline none
-
-      img
-        margin auto
-        max-width 150px
-        size(50%)

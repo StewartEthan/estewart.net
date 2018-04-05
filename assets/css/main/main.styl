@@ -1,0 +1,24 @@
+:root
+  font-size var(--font-body-size, 16px)
+
+html, body
+  margin 0
+  padding 0
+
+body
+  background-color var(--color-accent-gray)
+  color var(--color-main-dark)
+  font-family var(--font-body-family)
+  font-size var(--font-body-size)
+
+  & > div
+    box-shadow 0 0 15rem 5rem var(--color-accent-gray-dark)
+    display grid
+    grid-template-rows auto 1fr auto
+    margin 0 auto
+    max-width 768px
+    min-height 100vh
+
+main
+  background-color var(--color-main-light)
+  padding-bottom 1.5rem

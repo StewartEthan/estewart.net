@@ -1,26 +1,67 @@
-// Colors
-$primary-blue = #002265
-$logo-color = #0084FF
-$gray-accent = #D0D0D0 - 25%
-$text-color = #333;
+$color-shade-offset = 50%
+$color-main-light = #eee4e5
+$color-main-dark = #141916
+$color-primary = #082d78
+$color-primary-light = $color-primary + $color-shade-offset
+$color-primary-dark = $color-primary - $color-shade-offset
+$color-accent-blue = #49adb9
+$color-accent-blue-light = $color-accent-blue + $color-shade-offset
+$color-accent-blue-dark = $color-accent-blue - $color-shade-offset
+$color-accent-lilac = #84698d
+$color-accent-lilac-light = $color-accent-lilac + $color-shade-offset
+$color-accent-lilac-dark = $color-accent-lilac - $color-shade-offset
+$color-accent-gray = #9c9c9c
+$color-accent-gray-light = $color-accent-gray + $color-shade-offset
+$color-accent-gray-dark = $color-accent-gray - $color-shade-offset
+$color-util-success = #3f8d64
+$color-util-success-light = $color-util-success + $color-shade-offset
+$color-util-success-dark = $color-util-success - $color-shade-offset
+$color-util-warning = #bc7d2c
+$color-util-warning-light = $color-util-warning + $color-shade-offset
+$color-util-warning-dark = $color-util-warning - $color-shade-offset
+$color-util-danger = #f44336
+$color-util-danger-light = $color-util-danger + $color-shade-offset
+$color-util-danger-dark = $color-util-danger - $color-shade-offset
 
-$btn-bkgd-color = $gray-accent + 70%
-$btn-bdr-color = $gray-accent + 25%
-$cta-btn-color = #228B22 - 5%
+:root
+  // Colors
+  --color-main-light $color-main-light
+  --color-main-dark $color-main-dark
+  --color-primary $color-primary
+  --color-primary-light $color-primary-light
+  --color-primary-dark $color-primary-dark
+  --color-accent-blue $color-accent-blue
+  --color-accent-blue-light $color-accent-blue-light
+  --color-accent-blue-dark $color-accent-blue-dark
+  --color-accent-lilac $color-accent-lilac
+  --color-accent-lilac-light $color-accent-lilac-light
+  --color-accent-lilac-dark $color-accent-lilac-dark
+  --color-accent-gray $color-accent-gray
+  --color-accent-gray-light $color-accent-gray-light
+  --color-accent-gray-dark $color-accent-gray-dark
+  --color-util-success $color-util-success
+  --color-util-success-light $color-util-success-light
+  --color-util-success-dark $color-util-success-dark
+  --color-util-warning $color-util-warning
+  --color-util-warning-light $color-util-warning-light
+  --color-util-warning-dark $color-util-warning-dark
+  --color-util-danger $color-util-danger
+  --color-util-danger-light $color-util-danger-light
+  --color-util-danger-dark $color-util-danger-dark
 
-$alert-bkgd-color = $logo-color + 80%
-$alert-bdr-color = $alert-bkgd-color - 60%
-$warn-alert-bkgd-color = yellow + 80%
-$warn-alert-bdr-color = $warn-alert-bkgd-color - 60%
+  // Typography
+  --font-body-color var(--color-main-dark)
+  --font-body-family 'Maven Pro', Verdana, sans-serif
+  --font-body-size 18px
+  $font-heading-color = $color-main-dark - 10%
+  --font-heading-color $font-heading-color
+  --font-heading-family 'Alice', Georgia, serif
 
 
 // Layout
+// TODO: Turn into CSS vars
 $doc-min-height = 650px
 $tiny = 600px
 $small = 768px
 $normal = 980px
 $large = 1200px
-
-// Typography
-$primary-font = Verdana, sans-serif
-$heading-font = "Trebuchet MS", sans-serif

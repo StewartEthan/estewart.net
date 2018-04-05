@@ -1,23 +1,20 @@
 nav
-  background-color $primary-blue
-  color white
-  font-family $heading-font
-  font-size 1.1rem
-  grid-area nav
+  background-color var(--color-primary)
+  color var(--color-main-light)
+  font-family var(--font-heading-family)
+  font-size 1.25rem
   text-shadow 1.5px 1.5px 3px black
 
   +break()
     font-size 1.5rem
-  +break($small)
-    flex-grow 1
 
   ul
     display grid
-    grid-template-columns repeat(4, 1fr)
+    grid-gap 0.375rem
+    grid-template-columns repeat(auto-fit, minmax(5rem, 1fr))
     margin 0
 
     li
-      font-family $heading-font
       letter-spacing 2px
       padding 10px 0
       text-align center

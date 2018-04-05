@@ -17,13 +17,3 @@ block content
       the purpose of that area of the site. Feel free to reach out to me
       using any of the icons in the footer below if you have any questions,
       feedback, or suggestions.
-  
-block scripts
-  script.
-    var toggleTwitter = document.querySelector('.twitter-wrapper > button');
-    toggleTwitter.addEventListener('click', function(e) {
-      var text = toggleTwitter.textContent;
-      var twitter = toggleTwitter.nextElementSibling;
-      twitter.classList.toggle('invis');
-      toggleTwitter.textContent = text === 'Show Twitter feed' ? 'Hide Twitter feed' : 'Show Twitter feed'
-    });
