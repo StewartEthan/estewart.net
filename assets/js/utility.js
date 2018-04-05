@@ -22,6 +22,17 @@
   };
 
   /**
+   * Converts a decimal number to hexadecimal
+   * @param  {Number} num        The number to be converted to hexadecimal
+   * @param  {Number} digitCount Optional. The maximum number of hex digits to include. Defaults to 4
+   * @return {String}            Hexadecimal string
+   */
+  window.util.decToHex = (num, digitCount = 4) => (Number(num) + 0x10000)
+    .toString(16)
+    .substr(digitCount * -1)
+    .toUpperCase();
+
+  /**
    * Determines whether a number is even
    * @param  {Number} num The number to check for being even
    * @return {Boolean}    Whether the number is even
